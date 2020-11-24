@@ -1,0 +1,44 @@
+@import "../../style/style.css";
+@import "../../style/colors.css";
+@import "../../style/normalize.css";
+
+.main {
+  max-width: 1024px;
+}
+
+.top-half {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-red);
+  min-height: 50vh;
+}
+
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 2.3em;
+  color: var(--primary-white);
+}
+
+.sub-title {
+  color: var(--primary-white);
+  margin-top: 0.3em;
+}
+
+.button {
+  position: relative;
+  color: var(--primary-white);
+  background: linear-gradient(
+    to right,
+    var(--primary-red),
+    var(--primary-orange)
+  );
+  border-radius: 50px;
+  height: 64px;
+  width: 240px;
+}
