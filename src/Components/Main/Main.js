@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./main.css";
 
 const Main = () => {
@@ -31,20 +32,20 @@ const BottomHalf = () => {
     <div className="bottom-half container">
       <div className="row">
         <div className="col-12 button-wrapper">
-          <Button name="Create Account" />
-          <Button name="Login" />
-          <Button name="About" />
+          <Button name="Create Account" link="/register" />
+          <Button name="Login" link="/login" />
+          <Button name="About" link="/about" />
         </div>
       </div>
     </div>
   );
 };
 
-const Button = ({ name }) => {
+const Button = ({ name, link }) => {
   return (
-    <a href="#">
+    <Link to={link}>
       <button className="button">{name}</button>
-    </a>
+    </Link>
   );
 };
 
