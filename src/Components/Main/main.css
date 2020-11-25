@@ -12,6 +12,7 @@
 
 .bottom-half {
   display: flex;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
   height: 50%;
@@ -55,4 +56,5 @@ footer {
   background-color: var(--primary-white);
   text-align: center;
   font-size: 0.6em;
+  margin-top: 10px;
 }

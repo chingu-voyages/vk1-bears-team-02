@@ -8,7 +8,6 @@ const Main = () => {
       <main className="page-container">
         <TopHalf />
         <BottomHalf />
-        <Footer />
       </main>
     </>
   );
@@ -37,6 +36,7 @@ const BottomHalf = () => {
           <Button name="About" link="/about" />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
