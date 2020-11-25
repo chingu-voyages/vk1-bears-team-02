@@ -14,7 +14,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 50vh;
+  height: 50%;
+  background-color: var(--primary-white);
 }
 
 .logo-wrapper,
@@ -51,6 +52,7 @@ h1 {
 }
 
 footer {
+  background-color: var(--primary-white);
   text-align: center;
   font-size: 0.6em;
 }
