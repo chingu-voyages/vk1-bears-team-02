@@ -5,7 +5,7 @@ import "./main.css";
 const Main = () => {
   return (
     <>
-      <main className="main">
+      <main className="page-container">
         <TopHalf />
         <BottomHalf />
         <Footer />

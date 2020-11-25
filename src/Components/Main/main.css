@@ -1,12 +1,6 @@
 @import "../../style/style.css";
 @import "../../style/colors.css";
-
-.main {
-  max-width: 1024px;
-  width: 100%;
-  height: 100%;
-  box-shadow: 3px 2px 22px -1px rgba(61, 58, 74, 1);
-}
+@import "../../App.css";
 
 .top-half {
   display: flex;
