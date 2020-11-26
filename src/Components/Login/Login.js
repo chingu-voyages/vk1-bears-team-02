@@ -48,7 +48,7 @@ const Login = () => {
           Login
         </Button>
       </Form>
-      <Footer footerTitle="Don't have an account?" footerLink="Sign Up" />
+      <Footer footerTitle="Don't have an account?" footerLink="Register" />
     </main>
   );
 };
@@ -85,7 +85,7 @@ const Footer = ({ footerTitle, footerLink }) => {
   return (
     <div className="footer d-flex flex-column align-items-center">
       <h6>{footerTitle}</h6>
-      <Link to="/register" className="mt-n2 font-italic">
+      <Link to={`/${footerLink}`} className="mt-n2 font-italic">
         {footerLink}
       </Link>
     </div>
