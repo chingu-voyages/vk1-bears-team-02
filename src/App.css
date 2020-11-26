@@ -1,4 +1,6 @@
-#root {
-  display: flex;
-  justify-content: center;
+.page-container {
+  max-width: 1024px;
+  width: 100%;
+  height: 100vh;
+  box-shadow: 3px 2px 22px -1px rgba(61, 58, 74, 1);
 }
