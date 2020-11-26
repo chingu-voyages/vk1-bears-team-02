@@ -92,4 +92,4 @@ const Footer = ({ footerTitle, footerLink }) => {
   );
 };
 
-export default Login;
+export { Login, Nav, Logo, Footer };
