@@ -6,8 +6,16 @@ const Main = () => {
   return (
     <>
       <main className="page-container">
-        <TopHalf />
-        <BottomHalf />
+        <div className="d-flex flex-column align-items-center justify-content-center logo-wrapper h-50">
+          <h1 className="logo">e-Sagip</h1>
+          <p className="sub-title">One click away to get help.</p>
+        </div>
+        <div className="d-flex flex-column align-items-center justify-content-center h-50">
+          <Button name="Create Account" link="/register" />
+          <Button name="Login" link="/login" />
+          <Button name="About" link="/about" />
+          <Footer />
+        </div>
       </main>
     </>
   );
@@ -18,7 +26,7 @@ const TopHalf = () => {
     <div className="top-half container">
       <div className="row">
         <div className="col-12 logo-wrapper">
-          <h1>e-Sagip</h1>
+          <h1 className="logo">e-Sagip</h1>
           <p className="sub-title">One click away to get help.</p>
         </div>
       </div>
@@ -50,7 +58,11 @@ const Button = ({ name, link }) => {
 };
 
 const Footer = () => {
-  return <footer>Copyright &#169; 2020. All rights reserved.</footer>;
+  return (
+    <footer className="mt-1">
+      Copyright &#169; 2020. All rights reserved.
+    </footer>
+  );
 };
 
 export default Main;

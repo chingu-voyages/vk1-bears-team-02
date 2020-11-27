@@ -4,7 +4,3 @@ body {
   font-family: Raleway, sans-serif;
   color: var(--primary-red);
 }
-
-.col-12 {
-  width: calc(100% / 12 * 12);
-}
