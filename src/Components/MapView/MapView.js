@@ -2,7 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
+import axios from "axios";
+
 import "./styles.css";
+
+import PopOver from "./PopOver";
 
 mapboxgl.accessToken =
 	"pk.eyJ1IjoiaXZhbmZ1bmNpb24iLCJhIjoiY2s5NGd5NGphMDFucjNpbDJ6d285cjNociJ9.HBWvHMgpYyY53znT78H8bA";
@@ -71,6 +75,9 @@ const MapView = () => {
 		lng: 120.9842,
 		lat: 14.5995,
 	});
+
+	const [geotrigger, setGeotrigger] = useState(false);
+
 	const mapContainer = useRef(null);
 
 	useEffect(() => {
@@ -83,19 +90,51 @@ const MapView = () => {
 				pitch: 45,
 			});
 
+			// Initialize the geolocate control.
+			var geolocate = new mapboxgl.GeolocateControl({
+				positionOptions: {
+					enableHighAccuracy: true,
+				},
+				trackUserLocation: true,
+			});
+			// Add the control to the map.
+			map.addControl(geolocate);
+
 			map.on("load", () => {
 				setMap(map);
+				// geolocate.trigger();
 				map.resize();
 			});
 
-			coordinates.forEach((data) => {
-				new mapboxgl.Marker().setLngLat([data.lng, data.lat]).addTo(map);
-				new mapboxgl.Popup({ offset: popupOffsets, className: "popover-style" })
-					.setLngLat([data.lng, data.lat])
-					.setHTML(`<p>${data.description}</p>`)
-					.setMaxWidth("500px")
-					.addTo(map);
+			axios.get(`http://localhost:5000/coordinates`).then((res) => {
+				const data = res.data;
+				//   this.setState({ persons });
+				const coordinate_data = data.data;
+				console.log(coordinate_data);
+
+				coordinate_data.forEach((data) => {
+					// console.log(data.properties.message);
+					new mapboxgl.Marker().setLngLat(data.geometry.coordinates).addTo(map);
+					new mapboxgl.Popup({
+						offset: popupOffsets,
+						className: "popover-style",
+					})
+						.setLngLat(data.geometry.coordinates)
+						// .setHTML(<PopOver message={data.properties.message} />)
+						.setHTML(`<p>${data.properties.message}</p>`)
+						.setMaxWidth("320px")
+						.addTo(map);
+				});
 			});
+
+			// coordinates.forEach((data) => {
+			// 	new mapboxgl.Marker().setLngLat([data.lng, data.lat]).addTo(map);
+			// 	new mapboxgl.Popup({ offset: popupOffsets, className: "popover-style" })
+			// 		.setLngLat([data.lng, data.lat])
+			// 		.setHTML(`<p>${data.description}</p>`)
+			// 		.setMaxWidth("500px")
+			// 		.addTo(map);
+			// });
 		};
 
 		if (!map) initializeMap({ setMap, mapContainer });
@@ -104,7 +143,13 @@ const MapView = () => {
 	return (
 		<>
 			<div ref={(element) => (mapContainer.current = element)} style={styles} />
-			<h1>hello</h1>
+			<button
+				onClick={() => {
+					setGeotrigger(!geotrigger);
+					console.log(geotrigger);
+				}}>
+				Trigger
+			</button>
 		</>
 	);
 };
