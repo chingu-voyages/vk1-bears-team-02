@@ -8,8 +8,10 @@ import "./styles.css";
 
 import PopOver from "./PopOver";
 
-mapboxgl.accessToken =
-	"pk.eyJ1IjoiaXZhbmZ1bmNpb24iLCJhIjoiY2s5NGd5NGphMDFucjNpbDJ6d285cjNociJ9.HBWvHMgpYyY53znT78H8bA";
+// mapboxgl.accessToken =
+// 	"pk.eyJ1IjoiaXZhbmZ1bmNpb24iLCJhIjoiY2s5NGd5NGphMDFucjNpbDJ6d285cjNociJ9.HBWvHMgpYyY53znT78H8bA";
+
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 const styles = {
 	width: "100vw",
@@ -120,7 +122,7 @@ const MapView = () => {
 						className: "popover-style",
 					})
 						.setLngLat(data.geometry.coordinates)
-						// .setHTML(<PopOver message={data.properties.message} />)
+						//.setHTML(<PopOver message="ivan" />)
 						.setHTML(`<p>${data.properties.message}</p>`)
 						.setMaxWidth("320px")
 						.addTo(map);
