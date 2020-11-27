@@ -1,0 +1,15 @@
+.popover-style {
+	background: red;
+}
+
+.popover-style p {
+	color: "black";
+}
+
+.mapboxgl-popup-content {
+	background: yellow;
+}
+
+.mapboxgl-popup-close-button {
+	width: fit-content;
+}
