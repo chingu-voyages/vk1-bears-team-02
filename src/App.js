@@ -9,10 +9,9 @@ import Main from "./Components/Main/Main";
 import { Login } from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Private from "./Components/Private";
 
 const App = () => {
-  const [authenticated, setAuthenticated] = useState(true);
+  const [authenticated, setAuthenticated] = useState(false);
   const PublicRoute = ({ component: Component, authenticated, ...rest }) => {
     return (
       <Route
@@ -55,12 +54,6 @@ const App = () => {
           component={Register}
           authenticated={authenticated}
         ></PublicRoute>
-        <PrivateRoute
-          exact
-          path="/Private"
-          authenticated={authenticated}
-          component={Private}
-        ></PrivateRoute>
       </Switch>
     </Router>
   );
