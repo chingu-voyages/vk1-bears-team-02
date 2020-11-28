@@ -8,16 +8,21 @@ import {
 import Main from "./Components/Main/Main";
 import { Login } from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
+import Flood from "./Components/user/Flood/Flood";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(true);
   const PublicRoute = ({ component: Component, authenticated, ...rest }) => {
     return (
       <Route
         {...rest}
         component={(props) =>
-          authenticated ? <Redirect to="/private" /> : <Component {...props} />
+          authenticated ? (
+            <Redirect to="/user/flood" />
+          ) : (
+            <Component {...props} />
+          )
         }
       />
     );
@@ -54,6 +59,12 @@ const App = () => {
           component={Register}
           authenticated={authenticated}
         ></PublicRoute>
+        <PrivateRoute
+          exact
+          path="/user/flood"
+          component={Flood}
+          authenticated={authenticated}
+        ></PrivateRoute>
       </Switch>
     </Router>
   );

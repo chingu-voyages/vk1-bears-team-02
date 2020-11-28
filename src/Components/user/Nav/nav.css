@@ -1,0 +1,35 @@
+@import "../../../style/colors.css";
+
+.user-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: var(--primary-red);
+  height: 55px;
+}
+
+.menu-button,
+.logout-button {
+  margin: 0 26px;
+  fill: var(--primary-white);
+}
+
+.nav-links {
+  position: absolute;
+  left: 0;
+  top: 55px;
+  height: 100vh;
+  background-color: var(--primary-red);
+  width: 50%;
+  animation: slidein 3s linear infinite;
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
