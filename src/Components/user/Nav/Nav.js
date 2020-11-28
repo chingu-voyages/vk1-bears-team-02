@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import "./nav.css";
 
-const Nav = () => {
+const Nav = ({ authenticated, setAuthenticated }) => {
+  const [status, setStatus] = useState("close");
+  const changeStatus = (e) => {
+    e.preventDefault();
+    setStatus(status === "close" ? "open" : "close");
+  };
+  const logout = (e) => {
+    e.preventDefault();
+    setAuthenticated(false);
+  };
   return (
     <nav className="user-navbar">
-      <ul className="nav-links">
-        <li>Home</li>
-      </ul>
-      <a href="#">
+      <aside className={`nav-links-${status}`}>
+        <ul>
+          <li>
+            <a href="/user">Profile</a>
+          </li>
+          <li>
+            <a href="/user/flood">Get Help</a>
+          </li>
+          <li>
+            <a href="/user/map">Map</a>
+          </li>
+        </ul>
+      </aside>
+
+      <a href="/" onClick={changeStatus}>
         <svg
           className="menu-button"
           height="22px"
@@ -20,7 +40,7 @@ const Nav = () => {
           <path d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" />
         </svg>
       </a>
-      <a href="#">
+      <a href="/" onClick={logout}>
         <svg
           className="logout-button"
           height="24px"

@@ -50,7 +50,12 @@ const App = () => {
         <PublicRoute
           exact
           path="/Login"
-          component={Login}
+          component={() => (
+            <Login
+              authenticated={authenticated}
+              setAuthenticated={setAuthenticated}
+            />
+          )}
           authenticated={authenticated}
         ></PublicRoute>
         <PublicRoute
@@ -62,7 +67,12 @@ const App = () => {
         <PrivateRoute
           exact
           path="/user/flood"
-          component={Flood}
+          component={() => (
+            <Flood
+              authenticated={authenticated}
+              setAuthenticated={setAuthenticated}
+            />
+          )}
           authenticated={authenticated}
         ></PrivateRoute>
       </Switch>

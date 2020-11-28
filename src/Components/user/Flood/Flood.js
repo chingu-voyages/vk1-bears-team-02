@@ -1,10 +1,10 @@
 import React from "react";
 import Nav from "../Nav/Nav";
 
-function Flood() {
+function Flood({ authenticated, setAuthenticated }) {
   return (
     <main className="page-container">
-      <Nav />
+      <Nav authenticated={authenticated} setAuthenticated={setAuthenticated} />
     </main>
   );
 }
