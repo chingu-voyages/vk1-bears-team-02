@@ -13,3 +13,7 @@
 .mapboxgl-popup-close-button {
 	width: fit-content;
 }
+
+.map-container {
+	overflow-x: hidden;
+}
