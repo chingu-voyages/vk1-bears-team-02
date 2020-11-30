@@ -13,12 +13,10 @@ import PopOver from "./PopOver";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-const styles = {
-	width: "100vw",
-	height: "calc(100vh - 80px)",
-	// height: "100vh",
-	// position: "absolute",
-};
+// const styles = {
+// 	// height: "100vh",
+// 	// position: "absolute",
+// };
 const markerHeight = 50,
 	markerRadius = 10,
 	linearOffset = 25;
@@ -39,39 +37,7 @@ const popupOffsets = {
 
 const MapView = () => {
 	const [map, setMap] = useState(null);
-	// const [coordinates, setCoordinates] = useState([
-	// 	{
-	// 		lng: 121.0244, //n to s
-	// 		lat: 14.5547, //e to w
-	// 		description: "Fire at this location",
-	// 	},
-	// 	{
-	// 		lng: 121.0437, //n to s
-	// 		lat: 14.676, //e to w
-	// 		description: "Fire at this location",
-	// 	},
 
-	// 	{
-	// 		lng: 120.984222, //n to s
-	// 		lat: 14.599512, //e to w
-	// 		description: "Fire at this location",
-	// 	},
-	// 	{
-	// 		lng: 120.81604, //n to s
-	// 		lat: 14.852739, //e to w
-	// 		description: "Earthquake at this location",
-	// 	},
-	// 	{
-	// 		lng: 120.608589, //n to s
-	// 		lat: 15.80002, //e to w
-	// 		description: "flashflood at this location",
-	// 	},
-	// 	{
-	// 		lng: 121.050865, //n to s
-	// 		lat: 14.517618, //e to w
-	// 		description: "Hail Storm at this location",
-	// 	},
-	// ]);
 	const [initialView, setInitialView] = useState({
 		lng: 120.9842,
 		lat: 14.5995,
@@ -83,17 +49,37 @@ const MapView = () => {
 
 	const [geotrigger, setGeotrigger] = useState(false);
 
+	const [mapstyle, setMapStyle] = useState(
+		"mapbox://styles/mapbox/streets-v11"
+	);
+
 	const mapContainer = useRef(null);
 
 	useEffect(() => {
 		const initializeMap = ({ setMap, mapContainer }) => {
 			const map = new mapboxgl.Map({
 				container: mapContainer.current,
-				style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
+				style: mapstyle,
 				center: [initialView.lng, initialView.lat],
 				zoom: zoom,
-				pitch: tiltAngle,
+				// pitch: tiltAngle,
 			});
+
+			// Add a stretchable image that can be used with `icon-text-fit`
+			// In this example, the image is 600px wide by 400px high.
+			map.loadImage(
+				"https://i.pinimg.com/originals/d3/50/f9/d350f9828f7a3c6d7559e734788c758d.png",
+				function (error, image) {
+					if (error) throw error;
+					if (!map.hasImage("border-image")) {
+						map.addImage("border-image", image, {
+							content: [16, 16, 300, 384], // place text over left half of image, avoiding the 16px border
+							stretchX: [[16, 584]], // stretch everything horizontally except the 16px border
+							stretchY: [[16, 384]], // stretch everything vertically except the 16px border
+						});
+					}
+				}
+			);
 
 			// Initialize the geolocate control.
 			let geolocate = new mapboxgl.GeolocateControl({
@@ -103,7 +89,10 @@ const MapView = () => {
 				trackUserLocation: true,
 			});
 			// Add the control to the map.
-			map.addControl(geolocate);
+			map.addControl(geolocate, "bottom-left");
+
+			// add navigation control (zoom buttons)
+			map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
 
 			map.on("load", () => {
 				setMap(map);
@@ -121,33 +110,7 @@ const MapView = () => {
 				});
 
 				setZoom(map.getZoom().toFixed(4));
-
-				if (zoom > 7) {
-					alert("s");
-					console.log(`type of ${typeof zoom}`);
-				}
 			});
-
-			// axios.get(`http://localhost:5000/coordinates`).then((res) => {
-			// 	const data = res.data;
-			// 	//   this.setState({ persons });
-			// 	const coordinate_data = data.data;
-			// 	console.log(coordinate_data);
-
-			// 	coordinate_data.forEach((data) => {
-			// 		// console.log(data.properties.message);
-			// 		new mapboxgl.Marker().setLngLat(data.geometry.coordinates).addTo(map);
-			// 		new mapboxgl.Popup({
-			// 			offset: popupOffsets,
-			// 			className: "popover-style",
-			// 		})
-			// 			.setLngLat(data.geometry.coordinates)
-			// 			//.setHTML(<PopOver message="ivan" />)
-			// 			.setHTML(`<p>${data.properties.message}</p>`)
-			// 			.setMaxWidth("320px")
-			// 			.addTo(map);
-			// 	});
-			// });
 
 			const getAllCoordinates = async () => {
 				try {
@@ -176,16 +139,8 @@ const MapView = () => {
 				}
 			};
 
-			// coordinates.forEach((data) => {
-			// 	new mapboxgl.Marker().setLngLat([data.lng, data.lat]).addTo(map);
-			// 	new mapboxgl.Popup({ offset: popupOffsets, className: "popover-style" })
-			// 		.setLngLat([data.lng, data.lat])
-			// 		.setHTML(`<p>${data.description}</p>`)
-			// 		.setMaxWidth("500px")
-			// 		.addTo(map);
-			// });
-
 			getAllCoordinates();
+			console.log(`reinitialize`);
 		};
 
 		if (!map) initializeMap({ setMap, mapContainer });
@@ -193,11 +148,57 @@ const MapView = () => {
 
 	return (
 		<div className="map-container">
-			<div ref={(element) => (mapContainer.current = element)} style={styles} />
-			<p>
-				Longitude: {initialView.lng} | Latitude: {initialView.lat} | Tilt angle:
-				{tiltAngle} | Zoom : {zoom}
-			</p>
+			<div
+				ref={(element) => (mapContainer.current = element)}
+				className="map-renderer"
+			/>
+			<div className="sidebarStyle">
+				<p>
+					Longitude: {initialView.lng} | Latitude: {initialView.lat} | Zoom :{" "}
+					{zoom}
+				</p>
+				<div>
+					{/* <select
+						onChange={(e) => {
+							setMapStyle(e.target.value);
+							console.log("yow ma man");
+							console.log(mapstyle);
+							alert(mapstyle);
+						}}
+						value={mapstyle}>
+						<option value="" disabled>
+							---map options---
+						</option>
+						<option value="mapbox://styles/mapbox/streets-v11">
+							Street mode
+						</option>
+						<option value="mapbox://styles/mapbox/dark-v10">Dark mode</option>
+						<option value="mapbox://styles/mapbox/outdoors-v11">
+							Outdor mode
+						</option>
+						<option value="mapbox://styles/mapbox/satellite-v9">
+							Satellite mode
+						</option>
+						<option value="mapbox://styles/mapbox/satellite-streets-v11">
+							Satellite street mode
+						</option>
+					</select> */}
+					{/* <button
+						onClick={() => {
+							setMapStyle("mapbox://styles/mapbox/dark-v10");
+						}}>
+						Dark mode
+					</button>
+					<button
+						onClick={() => {
+							setMapStyle("mapbox://styles/mapbox/satellite-streets-v11");
+						}}>
+						Satellite street mode
+					</button> */}
+
+					{/* https://codepen.io/roblabs/pen/zJjPzX */}
+				</div>
+			</div>
 		</div>
 	);
 };
