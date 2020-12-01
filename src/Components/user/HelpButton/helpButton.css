@@ -1,0 +1,24 @@
+@import "../../../style/colors.css";
+
+.help-button-wrapper {
+  height: 300px;
+  width: 300px;
+}
+
+.help-button {
+  height: 100%;
+  width: 100%;
+  max-width: 402px;
+  max-height: 402px;
+  border-radius: 100%;
+  border: 5px solid var(--primary-white);
+  background-color: inherit;
+  cursor: pointer;
+  padding: 20px;
+  color: var(--primary-white);
+}
+
+.help-button:after {
+  height: 100%;
+  width: 100%;
+}
