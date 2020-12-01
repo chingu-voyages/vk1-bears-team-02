@@ -1,3 +1,7 @@
+svg {
+	cursor: pointer;
+}
+
 .popover-style {
 	background: red;
 }

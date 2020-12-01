@@ -1,3 +1,4 @@
+import ReactDOM from "react-dom";
 import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -49,9 +50,7 @@ const MapView = () => {
 
 	const [geotrigger, setGeotrigger] = useState(false);
 
-	const [mapstyle, setMapStyle] = useState(
-		"mapbox://styles/mapbox/streets-v11"
-	);
+	const [mapstyle, setMapStyle] = useState("mapbox://styles/mapbox/dark-v10");
 
 	const mapContainer = useRef(null);
 
@@ -67,19 +66,6 @@ const MapView = () => {
 
 			// Add a stretchable image that can be used with `icon-text-fit`
 			// In this example, the image is 600px wide by 400px high.
-			map.loadImage(
-				"https://i.pinimg.com/originals/d3/50/f9/d350f9828f7a3c6d7559e734788c758d.png",
-				function (error, image) {
-					if (error) throw error;
-					if (!map.hasImage("border-image")) {
-						map.addImage("border-image", image, {
-							content: [16, 16, 300, 384], // place text over left half of image, avoiding the 16px border
-							stretchX: [[16, 584]], // stretch everything horizontally except the 16px border
-							stretchY: [[16, 384]], // stretch everything vertically except the 16px border
-						});
-					}
-				}
-			);
 
 			// Initialize the geolocate control.
 			let geolocate = new mapboxgl.GeolocateControl({
@@ -112,27 +98,42 @@ const MapView = () => {
 				setZoom(map.getZoom().toFixed(4));
 			});
 
+			//not used
+			map.on("mouseleave", "water", function () {
+				console.log("A mouseleave event occurred.");
+			});
+
 			const getAllCoordinates = async () => {
 				try {
 					console.log("call this");
 					const data = await axios.get(`http://localhost:5000/coordinates`);
 					const coordinate_data = data.data.data;
-					console.log(coordinate_data);
+					// console.log(coordinate_data);
 
 					coordinate_data.forEach((data) => {
 						// console.log(data.properties.message);
-						new mapboxgl.Marker()
-							.setLngLat(data.geometry.coordinates)
-							.addTo(map);
-						new mapboxgl.Popup({
+
+						let popupHolder = document.createElement("div");
+						ReactDOM.render(
+							<PopOver feature="scooby" datas={data} />,
+							popupHolder
+						);
+						let popup = new mapboxgl.Popup({
 							offset: popupOffsets,
 							className: "popover-style",
 						})
 							.setLngLat(data.geometry.coordinates)
 							//.setHTML(<PopOver message="ivan" />)
-							.setHTML(`<p>${data.properties.message}</p>`)
-							.setMaxWidth("320px")
+							// .setHTML(`<p>${data.properties.message}</p>`)
+							.setDOMContent(popupHolder)
+							// .setMaxWidth("320px")
 							.addTo(map);
+
+						new mapboxgl.Marker({ color: "#a40606" })
+							.setLngLat(data.geometry.coordinates)
+							.addTo(map)
+
+							.setPopup(popup);
 					});
 				} catch (error) {
 					console.log(error);
