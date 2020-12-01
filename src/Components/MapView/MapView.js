@@ -49,8 +49,10 @@ const MapView = () => {
 	const [tiltAngle, setTiltAngle] = useState(1);
 
 	const [geotrigger, setGeotrigger] = useState(false);
-
-	const [mapstyle, setMapStyle] = useState("mapbox://styles/mapbox/dark-v10");
+	// mapbox://styles/mapbox/dark-v10
+	const [mapstyle, setMapStyle] = useState(
+		"mapbox://styles/ivanfuncion/cki63927r0otl19t2eazqn8wq"
+	);
 
 	const mapContainer = useRef(null);
 
