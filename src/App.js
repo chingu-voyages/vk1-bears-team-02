@@ -14,7 +14,7 @@ import Earthquake from "./Components/user/Earthquake/Earthquake";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
-  const [authenticated, setAuthenticated] = useState(true);
+  const [authenticated, setAuthenticated] = useState(false);
   const PublicRoute = ({ component: Component, authenticated, ...rest }) => {
     return (
       <Route
