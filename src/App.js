@@ -8,6 +8,9 @@ import {
 import Main from "./Components/Main/Main";
 import { Login } from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
+import Flood from "./Components/user/Flood/Flood";
+import Fire from "./Components/user/Fire/Fire";
+import Earthquake from "./Components/user/Earthquake/Earthquake";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
@@ -17,7 +20,11 @@ const App = () => {
       <Route
         {...rest}
         component={(props) =>
-          authenticated ? <Redirect to="/private" /> : <Component {...props} />
+          authenticated ? (
+            <Redirect to="/user/flood" />
+          ) : (
+            <Component {...props} />
+          )
         }
       />
     );
@@ -45,7 +52,12 @@ const App = () => {
         <PublicRoute
           exact
           path="/Login"
-          component={Login}
+          component={() => (
+            <Login
+              authenticated={authenticated}
+              setAuthenticated={setAuthenticated}
+            />
+          )}
           authenticated={authenticated}
         ></PublicRoute>
         <PublicRoute
@@ -54,6 +66,39 @@ const App = () => {
           component={Register}
           authenticated={authenticated}
         ></PublicRoute>
+        <PrivateRoute
+          exact
+          path="/user/flood"
+          component={() => (
+            <Flood
+              authenticated={authenticated}
+              setAuthenticated={setAuthenticated}
+            />
+          )}
+          authenticated={authenticated}
+        ></PrivateRoute>
+        <PrivateRoute
+          exact
+          path="/user/fire"
+          component={() => (
+            <Fire
+              authenticated={authenticated}
+              setAuthenticated={setAuthenticated}
+            />
+          )}
+          authenticated={authenticated}
+        ></PrivateRoute>
+        <PrivateRoute
+          exact
+          path="/user/earthquake"
+          component={() => (
+            <Earthquake
+              authenticated={authenticated}
+              setAuthenticated={setAuthenticated}
+            />
+          )}
+          authenticated={authenticated}
+        ></PrivateRoute>
       </Switch>
     </Router>
   );

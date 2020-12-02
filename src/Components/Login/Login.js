@@ -6,13 +6,14 @@ import { Form, Button } from "react-bootstrap";
 import "./login.css";
 import backButton from "./img/back-button.svg";
 
-const Login = () => {
+const Login = ({ setAuthenticated }) => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     if (data.username === "" || data.password === "") {
       alert("Please fill out all fields");
     }
     console.log(data);
+    setAuthenticated(true);
   };
 
   return (
