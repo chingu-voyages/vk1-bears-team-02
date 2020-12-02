@@ -3,22 +3,21 @@ import Nav from "../Nav/Nav";
 import HelpButton from "../HelpButton/HelpButton";
 import Footer from "../Footer/Footer";
 
-import logo from "./img/flood.svg";
-import "./flood.css";
+import logo from "./img/fire.svg";
 
-function Flood({ authenticated, setAuthenticated }) {
-  const floodLogo = (
-    <img src={logo} width="65px" alt="flood logo" className="mb-4" />
+function Fire({ authenticated, setAuthenticated }) {
+  const fireLogo = (
+    <img src={logo} width="60px" alt="fire logo" className="mb-4" />
   );
   return (
     <main className="page-container">
       <Nav authenticated={authenticated} setAuthenticated={setAuthenticated} />
       <div className="help-button-container d-flex flex-column justify-content-center align-items-center">
-        <HelpButton logo={floodLogo} />
+        <HelpButton logo={fireLogo} />
       </div>
       <Footer />
     </main>
   );
 }
 
-export default Flood;
+export default Fire;
