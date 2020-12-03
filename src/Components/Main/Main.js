@@ -21,34 +21,6 @@ const Main = () => {
   );
 };
 
-const TopHalf = () => {
-  return (
-    <div className="top-half container">
-      <div className="row">
-        <div className="col-12 logo-wrapper">
-          <h1 className="logo">e-Sagip</h1>
-          <p className="sub-title">One click away to get help.</p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const BottomHalf = () => {
-  return (
-    <div className="bottom-half container">
-      <div className="row">
-        <div className="col-12 button-wrapper">
-          <Button name="Create Account" link="/register" />
-          <Button name="Login" link="/login" />
-          <Button name="About" link="/about" />
-        </div>
-      </div>
-      <Footer />
-    </div>
-  );
-};
-
 const Button = ({ name, link }) => {
   return (
     <Link to={link}>

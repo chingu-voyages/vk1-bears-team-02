@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./helpButton.css";
 
 const HelpButton = ({ logo }) => {
-  const [isSent, setStatus] = useState(false);
   const handleClick = () => {
     alert("Your distress message has been sent.");
   };
