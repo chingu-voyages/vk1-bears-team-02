@@ -11,6 +11,7 @@ import Register from "./Components/Register/Register";
 import Flood from "./Components/user/Flood/Flood";
 import Fire from "./Components/user/Fire/Fire";
 import Earthquake from "./Components/user/Earthquake/Earthquake";
+import Dashboard from "./Components/admin/Dashboard/Dashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
@@ -99,6 +100,12 @@ const App = () => {
           )}
           authenticated={authenticated}
         ></PrivateRoute>
+        <PublicRoute
+          exact
+          path="/admin"
+          component={Dashboard}
+          authenticated={authenticated}
+        ></PublicRoute>
       </Switch>
     </Router>
   );
