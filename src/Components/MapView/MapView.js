@@ -44,7 +44,7 @@ const MapView = () => {
 		lat: 14.5995,
 	});
 
-	const [zoom, setZoom] = useState(6);
+	const [zoom, setZoom] = useState(5);
 
 	const [tiltAngle, setTiltAngle] = useState(1);
 

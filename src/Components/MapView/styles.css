@@ -26,17 +26,17 @@ svg {
 	/* width: "100vw";
 	height: "100vh"; */
 	position: absolute;
-	top: 0;
+	top: 50px;
 	right: 0;
-	left: 0;
+	left: 307px;
 	bottom: 0;
 }
 
 .sidebarStyle {
 	display: inline-block;
 	position: absolute;
-	top: 0;
-	left: 0;
+	top: 39px;
+	left: 295px;
 	margin: 12px;
 	background-color: #404040;
 	color: #ffffff;
