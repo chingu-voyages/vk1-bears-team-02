@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 
 export default function PopOver(props) {
 	const { feature, datas } = props;
@@ -12,16 +13,17 @@ export default function PopOver(props) {
 	return (
 		<>
 			<div>
-				<h5>{properties.message}</h5>
+				<h3>{properties.message}</h3>
 				<p>
 					Longitude:{lng} | Latitude: {lat}
 				</p>
-				<button
+				<Button
+					variant="danger"
 					onClick={() => {
 						alert(properties.message);
 					}}>
 					respond
-				</button>
+				</Button>
 			</div>
 		</>
 	);

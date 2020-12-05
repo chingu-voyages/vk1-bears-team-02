@@ -11,11 +11,15 @@ svg {
 }
 
 .mapboxgl-popup-content {
-	background: yellow;
+	background: #ececec;
 }
 
 .mapboxgl-popup-close-button {
-	width: fit-content;
+	width: 20px;
+}
+
+.mapboxgl-popup-close-button:hover {
+	background: crimson;
 }
 
 .map-container {
@@ -43,4 +47,42 @@ svg {
 	z-index: 1 !important;
 	padding: 6px;
 	font-weight: bold;
+}
+
+.marker-icon-current-coordinate-user-style {
+	background-image: url("./icons/blue-man-png.png");
+	background-size: cover;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.marker-icon-flood-style {
+	background-image: url("./icons/kisspng-tsunami-wave-stock-photography-clip-art-tsunami-png-transparent-image-5a76817429be26.645158151517715828171.png");
+	background-size: cover;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.marker-icon-fire-style {
+	background-image: url("./icons/fire-png-696.png");
+	background-size: cover;
+	/* object-fit: contain; */
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.marker-icon-earthquake-style {
+	background-image: url("./icons/kisspng-vector-graphics-earthquake-image-natural-disaster-5c0320b3e7b220.072610591543708851949.png");
+	background-size: cover;
+	/* object-fit: contain; */
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	cursor: pointer;
 }

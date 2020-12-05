@@ -37,7 +37,10 @@ const popupOffsets = {
 };
 
 const MapView = () => {
-	const [map, setMap] = useState(null);
+	//example user
+	const [user, setUser] = useState("user");
+
+	const [mapState, setMap] = useState(null);
 
 	const [initialView, setInitialView] = useState({
 		lng: 120.9842,
@@ -48,11 +51,13 @@ const MapView = () => {
 
 	const [tiltAngle, setTiltAngle] = useState(1);
 
-	const [geotrigger, setGeotrigger] = useState(false);
-	// mapbox://styles/mapbox/dark-v10
-	const [mapstyle, setMapStyle] = useState(
-		"mapbox://styles/ivanfuncion/cki63927r0otl19t2eazqn8wq"
-	);
+	//  mapbox://styles/ivanfuncion/cki63927r0otl19t2eazqn8wq
+	const [mapstyle, setMapStyle] = useState("mapbox://styles/mapbox/dark-v10");
+
+	const [currentCoordinates, setCurrentCoordinates] = useState({
+		lng: 0,
+		lat: 0,
+	});
 
 	const mapContainer = useRef(null);
 
@@ -66,25 +71,53 @@ const MapView = () => {
 				// pitch: tiltAngle,
 			});
 
-			// Add a stretchable image that can be used with `icon-text-fit`
-			// In this example, the image is 600px wide by 400px high.
+			if (user === "admin") {
+			} else {
+				// Initialize the geolocate control.
+				let geolocate = new mapboxgl.GeolocateControl({
+					positionOptions: {
+						enableHighAccuracy: true,
+					},
+					trackUserLocation: true,
+					showUserLocation: false,
+				});
+				// Add the control to the map.
+				map.addControl(geolocate, "bottom-left");
+				// geolocate.trigger(alert("trigger"));
 
-			// Initialize the geolocate control.
-			let geolocate = new mapboxgl.GeolocateControl({
-				positionOptions: {
-					enableHighAccuracy: true,
-				},
-				trackUserLocation: true,
-			});
-			// Add the control to the map.
-			map.addControl(geolocate, "bottom-left");
+				// document.getElementById("trigger").addEventListener("click", () => {
+				// 	geolocate.trigger();
+				// });
+
+				// get your current coordinates
+				geolocate.on("geolocate", (e) => {
+					var lng = e.coords.longitude;
+					var lat = e.coords.latitude;
+					var position = [lng, lat];
+					console.log(position);
+
+					setCurrentCoordinates({
+						lng: lng,
+						lat: lat,
+					});
+
+					// create a HTML element for each feature
+					var iconHandler = document.createElement("div");
+					iconHandler.className = "marker-icon-current-coordinate-user-style";
+
+					new mapboxgl.Marker(iconHandler).setLngLat([lng, lat]).addTo(map);
+				});
+			}
 
 			// add navigation control (zoom buttons)
-			map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
+			let navigationControl = new mapboxgl.NavigationControl();
+			map.addControl(navigationControl, "bottom-right");
+
+			// add fullscreen control
+			// map.addControl(new mapboxgl.FullscreenControl());
 
 			map.on("load", () => {
 				setMap(map);
-				// geolocate.trigger();
 
 				map.resize();
 			});
@@ -103,6 +136,20 @@ const MapView = () => {
 			//not used
 			map.on("mouseleave", "water", function () {
 				console.log("A mouseleave event occurred.");
+			});
+
+			// setTimeout(() => {
+			// 	map.fitBounds([
+			// 		[32.958984, -5.353521],
+			// 		[43.50585, 5.615985],
+			// 	]);
+			// }, 5000);
+
+			document.getElementById("bounce").addEventListener("click", () => {
+				map.fitBounds([
+					[32.958984, -5.353521],
+					[43.50585, 5.615985],
+				]);
 			});
 
 			const getAllCoordinates = async () => {
@@ -127,11 +174,21 @@ const MapView = () => {
 							.setLngLat(data.geometry.coordinates)
 							//.setHTML(<PopOver message="ivan" />)
 							// .setHTML(`<p>${data.properties.message}</p>`)
-							.setDOMContent(popupHolder)
-							// .setMaxWidth("320px")
-							.addTo(map);
+							.setDOMContent(popupHolder);
+						// .setMaxWidth("320px")
+						// .addTo(map);
 
-						new mapboxgl.Marker({ color: "#a40606" })
+						// create a HTML element for each feature
+						var iconHandler = document.createElement("div");
+						if (data.properties.disasterType === "flood") {
+							iconHandler.className = "marker-icon-flood-style";
+						} else if (data.properties.disasterType === "fire") {
+							iconHandler.className = "marker-icon-fire-style";
+						} else if (data.properties.disasterType === "earthquake") {
+							iconHandler.className = "marker-icon-earthquake-style";
+						}
+
+						new mapboxgl.Marker(iconHandler)
 							.setLngLat(data.geometry.coordinates)
 							.addTo(map)
 
@@ -143,11 +200,11 @@ const MapView = () => {
 			};
 
 			getAllCoordinates();
-			console.log(`reinitialize`);
+			// console.log(`reinitialize`);
 		};
 
-		if (!map) initializeMap({ setMap, mapContainer });
-	}, [map]);
+		if (!mapState) initializeMap({ setMap, mapContainer });
+	}, [mapState]);
 
 	return (
 		<div className="map-container">
@@ -158,8 +215,11 @@ const MapView = () => {
 			<div className="sidebarStyle">
 				<p>
 					Longitude: {initialView.lng} | Latitude: {initialView.lat} | Zoom :{" "}
-					{zoom}
+					{zoom} | current: longitute {currentCoordinates.lng.toFixed(4)} and
+					latitude : {currentCoordinates.lat.toFixed(4)}
 				</p>
+				<button id="bounce">bounce</button>
+
 				<div>
 					{/* <select
 						onChange={(e) => {
