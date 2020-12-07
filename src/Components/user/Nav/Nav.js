@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthenticationContext } from "../../context/AuthenticationContext";
 import "./nav.css";
 
-const Nav = ({ authenticated, setAuthenticated }) => {
+const Nav = () => {
+  const { setAuth } = useContext(AuthenticationContext);
   const [status, setStatus] = useState("close");
   const changeStatus = (e) => {
     e.preventDefault();
@@ -9,7 +11,7 @@ const Nav = ({ authenticated, setAuthenticated }) => {
   };
   const logout = (e) => {
     e.preventDefault();
-    setAuthenticated(false);
+    setAuth(false);
   };
   return (
     <nav className="user-navbar">
