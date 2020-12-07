@@ -101,7 +101,6 @@ const MapView = () => {
 						lat: lat,
 					});
 
-					// create a HTML element for each feature
 					var iconHandler = document.createElement("div");
 					iconHandler.className = "marker-icon-current-coordinate-user-style";
 

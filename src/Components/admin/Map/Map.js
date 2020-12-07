@@ -7,7 +7,9 @@ import "./map.css";
 function Map() {
 	return (
 		<>
-			<MapView />
+			<div className="map">
+				<MapView />
+			</div>
 		</>
 	);
 }
