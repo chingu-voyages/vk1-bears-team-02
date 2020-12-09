@@ -2,21 +2,40 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
-
+import axios from 'axios'
 import { AuthenticationContext } from "../context/AuthenticationContext";
 
 import "./login.css";
 import backButton from "./img/back-button.svg";
 
 const Login = () => {
-  const { authenticated, setAuth } = useContext(AuthenticationContext);
+  const { authenticated, setAuth, details, setDetails } = useContext(AuthenticationContext);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
+    var flag = 1;
+
     if (data.username === "" || data.password === "") {
       alert("Please fill out all fields");
     }
-    console.log(data);
-    setAuth(true);
+    const initDetails = {
+      username: data.username,
+      password: data.password,
+    }
+    axios.post('http://localhost:5000/login', initDetails).catch(function (error) {
+      if (error.response) {
+        // Request made and server responded
+        alert("Login Error");
+        flag = 0
+      }
+
+    }).then(function () {
+      if (flag == 1) {
+        alert("Success")
+        setAuth(true);
+        setDetails({ username: data.username, password: data.password });
+
+      }
+    })
   };
 
   return (

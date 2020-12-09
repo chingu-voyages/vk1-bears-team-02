@@ -2,14 +2,35 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 import { Nav, Logo, Footer } from "../Login/Login";
-
+import axios from 'axios'
 import "./register.css";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    var flag = 1;
+    const initDetails = {
+      username: data.username,
+      password: data.password,
+      email: data.email
+
+    }
+    axios.post('http://localhost:5000/register', initDetails).catch(function (error) {
+      if (error.response) {
+        // Request made and server responded
+        alert(error.response.data.msg);
+        flag = 0;
+      }
+    }).then(function () {
+      if (flag == 1) {
+        alert("Success")
+      }
+    })
+
+
   };
+
   return (
     <main className="page-container register-page">
       <Nav page="Register" />
