@@ -13,7 +13,9 @@ export default function PopOver(props) {
 	return (
 		<>
 			<div>
-				<h3>{properties.message}</h3>
+				<h3>{properties.title}</h3>
+				<p>{properties.disasterType}</p>
+				<p>{properties.description}</p>
 				<p>
 					Longitude:{lng} | Latitude: {lat}
 				</p>

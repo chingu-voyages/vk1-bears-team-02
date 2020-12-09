@@ -2,6 +2,8 @@ import ReactDOM from "react-dom";
 import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
+import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
 import axios from "axios";
 
@@ -88,6 +90,13 @@ const MapView = () => {
 				// document.getElementById("trigger").addEventListener("click", () => {
 				// 	geolocate.trigger();
 				// });
+				const geocoder = new MapboxGeocoder({
+					accessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,
+					mapboxgl: mapboxgl,
+					color: "red",
+				});
+				console.log(geocoder);
+				map.addControl(geocoder);
 
 				// get your current coordinates
 				geolocate.on("geolocate", (e) => {
@@ -154,12 +163,10 @@ const MapView = () => {
 			const getAllCoordinates = async () => {
 				try {
 					console.log("call this");
-					const data = await axios.get(`http://localhost:5000/coordinates`);
-					const coordinate_data = data.data.data;
-					// console.log(coordinate_data);
-
-					coordinate_data.forEach((data) => {
-						// console.log(data.properties.message);
+					const data = await axios.get(`http://localhost:5000/map-data`);
+					const features = data.data.features;
+					features.forEach((data) => {
+						console.log(data.geometry.coordinates);
 
 						let popupHolder = document.createElement("div");
 						ReactDOM.render(
@@ -178,10 +185,12 @@ const MapView = () => {
 						// .addTo(map);
 
 						// create a HTML element for each feature
+						console.log(data.properties.disasterType);
 						var iconHandler = document.createElement("div");
-						if (data.properties.disasterType === "flood") {
+						if (data.properties.disasterType === "Flood") {
 							iconHandler.className = "marker-icon-flood-style";
-						} else if (data.properties.disasterType === "fire") {
+						} else if (data.properties.disasterType === "Fire") {
+							// alert("fire");
 							iconHandler.className = "marker-icon-fire-style";
 						} else if (data.properties.disasterType === "earthquake") {
 							iconHandler.className = "marker-icon-earthquake-style";
@@ -190,7 +199,6 @@ const MapView = () => {
 						new mapboxgl.Marker(iconHandler)
 							.setLngLat(data.geometry.coordinates)
 							.addTo(map)
-
 							.setPopup(popup);
 					});
 				} catch (error) {
