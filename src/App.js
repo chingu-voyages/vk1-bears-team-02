@@ -6,6 +6,7 @@ import Register from "./Components/Register/Register";
 import Flood from "./Components/user/Flood/Flood";
 import Fire from "./Components/user/Fire/Fire";
 import Earthquake from "./Components/user/Earthquake/Earthquake";
+import Profile from "./Components/user/Profile/Profile";
 import Dashboard from "./Components/admin/Dashboard/Dashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -38,6 +39,7 @@ const App = () => {
             path="/user/earthquake"
             component={Earthquake}
           ></PrivateRoute>
+          <PrivateRoute exact path="/user" component={Profile}></PrivateRoute>
           <PrivateRoute
             exact
             path="/admin"
