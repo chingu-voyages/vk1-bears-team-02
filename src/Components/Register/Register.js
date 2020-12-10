@@ -25,7 +25,7 @@ const Register = () => {
             placeholder="Enter your username"
             name="username"
             className="form-field"
-            ref={register}
+            ref={register({ required: true })}
           />
         </Form.Group>
 
@@ -36,7 +36,7 @@ const Register = () => {
             placeholder="Enter your email"
             name="email"
             className="form-field"
-            ref={register}
+            ref={register({ required: true })}
           />
         </Form.Group>
 
@@ -47,7 +47,7 @@ const Register = () => {
             placeholder="Enter password"
             name="password"
             className="form-field"
-            ref={register}
+            ref={register({ required: true })}
           />
         </Form.Group>
         <Button className="rounded-pill font-weight-bolder" type="submit">
