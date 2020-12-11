@@ -4,11 +4,15 @@ import { Form, Button } from "react-bootstrap";
 import { Nav, Logo, Footer } from "../Login/Login";
 
 import "./register.css";
+import swal from "sweetalert";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    return swal({
+      text: "You are now registered!",
+      icon: "success",
+    });
   };
   return (
     <main className="page-container register-page">
@@ -25,7 +29,7 @@ const Register = () => {
             placeholder="Enter your username"
             name="username"
             className="form-field"
-            ref={register}
+            ref={register({ required: true })}
           />
         </Form.Group>
 
@@ -36,7 +40,7 @@ const Register = () => {
             placeholder="Enter your email"
             name="email"
             className="form-field"
-            ref={register}
+            ref={register({ required: true })}
           />
         </Form.Group>
 
@@ -47,7 +51,7 @@ const Register = () => {
             placeholder="Enter password"
             name="password"
             className="form-field"
-            ref={register}
+            ref={register({ required: true })}
           />
         </Form.Group>
         <Button className="rounded-pill font-weight-bolder" type="submit">

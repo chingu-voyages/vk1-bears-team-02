@@ -1,10 +1,15 @@
 import React from "react";
+import swal from "sweetalert";
 
 import "./helpButton.css";
 
 const HelpButton = ({ logo }) => {
   const handleClick = () => {
-    alert("Your distress message has been sent.");
+    swal({
+      title: "Distress Sent",
+      text: "Your distress alert has been sent.",
+      icon: "success",
+    });
   };
   return (
     <>

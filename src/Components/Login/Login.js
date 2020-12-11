@@ -1,19 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
+import swal from "sweetalert";
+
+import { AuthenticationContext } from "../context/AuthenticationContext";
 
 import "./login.css";
 import backButton from "./img/back-button.svg";
 
-const Login = ({ setAuthenticated }) => {
+const Login = () => {
+  const { authenticated, setAuth } = useContext(AuthenticationContext);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     if (data.username === "" || data.password === "") {
-      alert("Please fill out all fields");
+      return swal({
+        text: "Please, fill out all form fields.",
+        icon: "warning",
+      });
     }
     console.log(data);
-    setAuthenticated(true);
+    setAuth(true);
   };
 
   return (
