@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Badge } from "react-bootstrap";
 import axios from "axios";
+import * as turf from "@turf/turf";
 
 export default function PopOver(props) {
 	const { datas } = props;
@@ -10,6 +11,24 @@ export default function PopOver(props) {
 	// const { properties, geometry } = data;
 
 	console.log(`data: ${geometry.coordinates}`);
+	const [currentUserCoordinate, setCurrentUserCoordinate] = useState({
+		lat: 0,
+		lang: 0,
+	});
+
+	useEffect(() => {
+		if (navigator.geolocation) {
+			navigator.geolocation.watchPosition(function (position) {
+				console.log("Latitude is :", position.coords.latitude);
+				console.log("Longitude is :", position.coords.longitude);
+
+				setCurrentUserCoordinate({
+					lat: position.coords.latitude,
+					lang: position.coords.longitude,
+				});
+			});
+		}
+	}, []);
 
 	const respond = (property) => {
 		alert(property._id);
@@ -48,6 +67,14 @@ export default function PopOver(props) {
 		sendResponse();
 	};
 
+	let from = turf.point([lng, lat]); // disaster coordinates
+	let to = turf.point([currentUserCoordinate.lang, currentUserCoordinate.lat]); // my coordinates
+	let options = { units: "kilometers" };
+
+	let distance = turf.distance(from, to, options);
+
+	console.log(`diff: ${distance}`);
+
 	return (
 		<>
 			<div>
@@ -69,6 +96,7 @@ export default function PopOver(props) {
 				<p>
 					Longitude:{lng} | Latitude: {lat}
 				</p>
+				<p>distance from your current position: {distance.toFixed(4)}Km</p>
 				<Button
 					variant="danger"
 					onClick={() => {
