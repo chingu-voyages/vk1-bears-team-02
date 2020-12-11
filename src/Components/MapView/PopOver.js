@@ -8,6 +8,7 @@ export default function PopOver(props) {
 	const { properties, geometry } = datas;
 	const { coordinates } = geometry;
 	const [lng, lat] = coordinates;
+	const [placeName, setPlaceName] = useState(null);
 	// const { properties, geometry } = data;
 
 	console.log(`data: ${geometry.coordinates}`);
@@ -67,6 +68,20 @@ export default function PopOver(props) {
 		sendResponse();
 	};
 
+	const geocodeCoordinates = async () => {
+		try {
+			const geocode = await axios.get(
+				`https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`
+			);
+			setPlaceName(geocode.data.features[0].place_name);
+			console.log(`geocode`);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	geocodeCoordinates();
+
 	let from = turf.point([lng, lat]); // disaster coordinates
 	let to = turf.point([currentUserCoordinate.lang, currentUserCoordinate.lat]); // my coordinates
 	let options = { units: "kilometers" };
@@ -96,6 +111,7 @@ export default function PopOver(props) {
 				<p>
 					Longitude:{lng} | Latitude: {lat}
 				</p>
+				<p>Place Name: {placeName}</p>
 				<p>distance from your current position: {distance.toFixed(4)}Km</p>
 				<Button
 					variant="danger"
