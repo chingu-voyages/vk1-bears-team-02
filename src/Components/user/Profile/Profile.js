@@ -15,9 +15,11 @@ function Profile() {
           <p className="ml-5 font-italic">john</p>
           <h3>Email</h3>
           <p className="ml-5 font-italic">john@email.com</p>
-          <button className="rounded-pill font-weight-bolder align-self-center mr-5">
-            Edit Info
-          </button>
+          <a href="/user/edit" className="align-self-center mr-5">
+            <button className="rounded-pill font-weight-bolder">
+              Edit Info
+            </button>
+          </a>
         </div>
         <div className="reports-wrapper mx-5 mt-4">
           <h2>Report History</h2>
