@@ -7,6 +7,7 @@ import Flood from "./Components/user/Flood/Flood";
 import Fire from "./Components/user/Fire/Fire";
 import Earthquake from "./Components/user/Earthquake/Earthquake";
 import Profile from "./Components/user/Profile/Profile";
+import Edit from "./Components/user/Profile/Edit/Edit";
 import Dashboard from "./Components/admin/Dashboard/Dashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -17,34 +18,39 @@ import PrivateRoute from "./Components/routes/PrivateRoute";
 import { AuthenticationProvider } from "./Components/context/AuthenticationContext";
 
 const App = () => {
-	return (
-		<Router>
-			<Switch>
-				<AuthenticationProvider>
-					<PublicRoute exact path="/" component={Main}></PublicRoute>
-					<PublicRoute exact path="/Login" component={Login}></PublicRoute>
-					<PublicRoute
-						exact
-						path="/Register"
-						component={Register}></PublicRoute>
-					<PrivateRoute
-						exact
-						path="/user/flood"
-						component={Flood}></PrivateRoute>
-					<PrivateRoute exact path="/user/fire" component={Fire}></PrivateRoute>
-					<PrivateRoute
-						exact
-						path="/user/earthquake"
-						component={Earthquake}></PrivateRoute>
-					<PrivateRoute exact path="/user" component={Profile}></PrivateRoute>
-					<PrivateRoute
-						exact
-						path="/admin"
-						component={Dashboard}></PrivateRoute>
-				</AuthenticationProvider>
-			</Switch>
-		</Router>
-	);
+  return (
+    <Router>
+      <Switch>
+        <AuthenticationProvider>
+          <PublicRoute exact path="/" component={Main}></PublicRoute>
+          <PublicRoute exact path="/Login" component={Login}></PublicRoute>
+          <PublicRoute
+            exact
+            path="/Register"
+            component={Register}
+          ></PublicRoute>
+          <PrivateRoute
+            exact
+            path="/user/flood"
+            component={Flood}
+          ></PrivateRoute>
+          <PrivateRoute exact path="/user/fire" component={Fire}></PrivateRoute>
+          <PrivateRoute
+            exact
+            path="/user/earthquake"
+            component={Earthquake}
+          ></PrivateRoute>
+          <PrivateRoute exact path="/user" component={Profile}></PrivateRoute>
+          <PrivateRoute exact path="/user/edit" component={Edit}></PrivateRoute>
+          <PrivateRoute
+            exact
+            path="/admin"
+            component={Dashboard}
+          ></PrivateRoute>
+        </AuthenticationProvider>
+      </Switch>
+    </Router>
+  );
 };
 
 export default App;
