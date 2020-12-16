@@ -6,4 +6,5 @@
 
 .btn-primary {
   color: var(--primary-red) !important;
+  background-color: var(--primary-white) !important;
 }

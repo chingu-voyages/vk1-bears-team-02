@@ -20,7 +20,7 @@ const Register = () => {
       <Logo />
       <Form
         onSubmit={handleSubmit(onSubmit)}
-        className="d-flex flex-column align-items-center my-4 h-50"
+        className="d-flex flex-column align-items-center my-4"
       >
         <Form.Group controlId="formBasicEmail" className="w-50">
           <Form.Label>Username</Form.Label>
@@ -32,7 +32,6 @@ const Register = () => {
             ref={register({ required: true })}
           />
         </Form.Group>
-
         <Form.Group controlId="formBasicEmail" className="w-50">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -43,7 +42,6 @@ const Register = () => {
             ref={register({ required: true })}
           />
         </Form.Group>
-
         <Form.Group controlId="formBasicPassword" className="w-50">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -54,9 +52,17 @@ const Register = () => {
             ref={register({ required: true })}
           />
         </Form.Group>
-        <Button className="rounded-pill font-weight-bolder" type="submit">
-          Sign Up
-        </Button>
+
+        <div className="button-wrapper mt-3">
+          <button
+            className="btn btn-primary rounded-pill font-weight-bolder"
+            type="submit"
+          >
+            Sign Up
+          </button>
+          <span className="or">or</span>
+          <button class="google-btn">Sign Up with Google</button>
+        </div>
       </Form>
       <Footer footerTitle="Already have an account?" footerLink="Login" />
     </main>

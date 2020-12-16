@@ -29,7 +29,7 @@ const Login = () => {
       <Logo />
       <Form
         onSubmit={handleSubmit(onSubmit)}
-        className="d-flex flex-column align-items-center my-4 h-50"
+        className="d-flex flex-column align-items-center my-4"
       >
         <Form.Group controlId="formBasicEmail" className="w-50">
           <Form.Label>Username</Form.Label>
@@ -41,7 +41,6 @@ const Login = () => {
             ref={register}
           />
         </Form.Group>
-
         <Form.Group controlId="formBasicPassword" className="w-50">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -52,9 +51,18 @@ const Login = () => {
             ref={register}
           />
         </Form.Group>
-        <Button className="rounded-pill font-weight-bolder" type="submit">
-          Login
-        </Button>
+        <div className="button-wrapper mt-3">
+          <button
+            className="btn btn-primary rounded-pill font-weight-bolder"
+            type="submit"
+          >
+            Login
+          </button>
+          <span className="or">or</span>
+          <button onClick={(e) => e.preventDefault()} class="google-btn">
+            Login with Google
+          </button>
+        </div>
       </Form>
       <Footer footerTitle="Don't have an account?" footerLink="Register" />
     </main>
@@ -91,7 +99,7 @@ const Logo = () => {
 
 const Footer = ({ footerTitle, footerLink }) => {
   return (
-    <div className="footer d-flex flex-column align-items-center">
+    <div className="footer d-flex flex-column align-items-center pb-4 mt-5">
       <h6>{footerTitle}</h6>
       <Link to={`/${footerLink}`} className="mt-n2 font-italic">
         {footerLink}

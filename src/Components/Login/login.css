@@ -15,6 +15,5 @@
 }
 
 .login-page button {
-  background-color: var(--primary-white) !important;
-  width: 114px;
+  min-width: 114px;
 }
