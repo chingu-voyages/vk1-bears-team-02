@@ -1,20 +1,26 @@
 @import "../../style/colors.css";
 
 .login-page {
-  background: var(--primary-red);
-  color: var(--primary-white);
+	background: var(--primary-red);
+	color: var(--primary-white);
 }
 
 .page-name {
-  font-size: 1.2em;
+	font-size: 1.2em;
 }
 
 .back-button {
-  height: 32px;
-  width: 32px;
+	height: 32px;
+	width: 32px;
 }
 
 .login-page button {
-  background-color: var(--primary-white) !important;
-  width: 114px;
+	min-width: 114px;
+}
+
+.google-btn {
+	cursor: pointer;
+}
+.google-btn:hover {
+	color: #fff;
 }
