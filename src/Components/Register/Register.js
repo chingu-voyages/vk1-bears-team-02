@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 import { Nav, Logo, Footer } from "../Login/Login";
@@ -6,13 +6,59 @@ import { Nav, Logo, Footer } from "../Login/Login";
 import "./register.css";
 import swal from "sweetalert";
 
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { AuthenticationContext } from "../context/AuthenticationContext";
+
 const Register = () => {
 	const { register, handleSubmit } = useForm();
+	const { authenticated, setAuth } = useContext(AuthenticationContext);
 	const onSubmit = (data) => {
-		return swal({
-			text: "You are now registered!",
-			icon: "success",
-		});
+		// console.log("sdddsds");
+		// return swal({
+		// 	text: "You are now registered!",
+		// 	icon: "success",
+		// });
+		// if (data.username === "" || data.password === "" || data.email === "") {
+		// 	return swal({
+		// 		text: "Please, fill out all form fields.",
+		// 		icon: "warning",
+		// 	});
+		// }
+		if (data.username === "" || data.password === "" || data.email === "") {
+			// return swal({
+			// 	text: "Please, fill out all form fields.",
+			// 	icon: "warning",
+			// });
+			toast.warning("Please, fill out all form fields!");
+		} else {
+			const getLoginDataWithForm = async (req, res) => {
+				try {
+					const response = await axios.post("http://localhost:5000/register", {
+						username: data.username,
+						password: data.password,
+						email: data.email,
+					});
+					console.log(response);
+					const message = response.data.message;
+					if (message === "user added") {
+						setTimeout(function () {
+							setAuth(true);
+						}, 6000);
+						toast.success(`You are now registered!`);
+					} else {
+						toast.warning(`${message}`);
+					}
+				} catch (error) {
+					console.error(`error:${error}`);
+				}
+			};
+			// console.log(data);
+			// setAuth(true);
+			getLoginDataWithForm();
+		}
 	};
 	return (
 		<main className="page-container register-page">
@@ -28,7 +74,7 @@ const Register = () => {
 						placeholder="Enter your username"
 						name="username"
 						className="form-field"
-						ref={register({ required: true })}
+						ref={register}
 					/>
 				</Form.Group>
 				<Form.Group controlId="formBasicEmail" className="w-50">
@@ -38,7 +84,7 @@ const Register = () => {
 						placeholder="Enter your email"
 						name="email"
 						className="form-field"
-						ref={register({ required: true })}
+						ref={register}
 					/>
 				</Form.Group>
 				<Form.Group controlId="formBasicPassword" className="w-50">
@@ -48,7 +94,7 @@ const Register = () => {
 						placeholder="Enter password"
 						name="password"
 						className="form-field"
-						ref={register({ required: true })}
+						ref={register}
 					/>
 				</Form.Group>
 
@@ -66,6 +112,7 @@ const Register = () => {
 				</div>
 			</Form>
 			<Footer footerTitle="Already have an account?" footerLink="Login" />
+			<ToastContainer />
 		</main>
 	);
 };
