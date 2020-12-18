@@ -5,6 +5,9 @@ import { Form, Button } from "react-bootstrap";
 import swal from "sweetalert";
 import axios from "axios";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { AuthenticationContext } from "../context/AuthenticationContext";
 
 import "./login.css";
@@ -13,15 +16,42 @@ import backButton from "./img/back-button.svg";
 const Login = () => {
 	const { authenticated, setAuth } = useContext(AuthenticationContext);
 	const { register, handleSubmit } = useForm();
+
 	const onSubmit = (data) => {
 		if (data.username === "" || data.password === "") {
-			return swal({
-				text: "Please, fill out all form fields.",
-				icon: "warning",
-			});
+			// return swal({
+			// 	text: "Please, fill out all form fields.",
+			// 	icon: "warning",
+			// });
+			toast.warning("Please, fill out all form fields!");
+		} else {
+			const getLoginDataWithForm = async (req, res) => {
+				try {
+					const response = await axios.post("http://localhost:5000/login", {
+						username: data.username,
+						password: data.password,
+					});
+					console.log(response);
+
+					const message = response.data.message;
+					if (message === "user login") {
+						setTimeout(function () {
+							setAuth(true);
+						}, 6000);
+
+						toast.success(`${message}`);
+					} else {
+						toast.warning(`${message}`);
+					}
+				} catch (error) {
+					console.error(`error:${error}`);
+				}
+			};
+			// console.log(data);
+			// setAuth(true);
+
+			getLoginDataWithForm();
 		}
-		console.log(data);
-		setAuth(true);
 	};
 
 	useEffect(() => {
@@ -40,7 +70,7 @@ const Login = () => {
 		// 	setAuth(true);
 		// }, 3000);
 
-		getLoginData();
+		// getLoginData();
 	}, []);
 
 	return (
@@ -83,6 +113,8 @@ const Login = () => {
 				</div>
 			</Form>
 			<Footer footerTitle="Don't have an account?" footerLink="Register" />
+
+			<ToastContainer />
 		</main>
 	);
 };
