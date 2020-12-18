@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import swal from "sweetalert";
+import axios from "axios";
 
 import { AuthenticationContext } from "../context/AuthenticationContext";
 
@@ -22,6 +23,25 @@ const Login = () => {
 		console.log(data);
 		setAuth(true);
 	};
+
+	useEffect(() => {
+		const getLoginData = async () => {
+			try {
+				const response = await axios.get(
+					"http://localhost:5000/auth/login/success"
+				);
+				console.log(response.data);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		// setTimeout(function () {
+		// 	alert("Hello");
+		// 	setAuth(true);
+		// }, 3000);
+
+		getLoginData();
+	}, []);
 
 	return (
 		<main className="page-container login-page">
