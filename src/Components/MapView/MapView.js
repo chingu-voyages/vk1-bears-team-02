@@ -164,6 +164,7 @@ const MapView = () => {
 			// Enable pusher logging - don't include this in production
 			Pusher.logToConsole = true;
 
+			//change this to your pusher key
 			const pusher = new Pusher("b74a80c7be8fd2b220d7", {
 				cluster: "us3",
 			});
@@ -219,10 +220,16 @@ const MapView = () => {
 			//init load
 			getAllCoordinates();
 
-			const channel = pusher.subscribe("map-data");
-			channel.bind("map-data-event", function (data) {
+			const channel = pusher.subscribe("map-data-create");
+			channel.bind("map-data-create-event", function (data) {
 				getAllCoordinates();
 			});
+
+			const channel2 = pusher.subscribe("map-data-update");
+			channel2.bind("map-data-update-event", function (data) {
+				getAllCoordinates();
+			});
+
 			// console.log(`reinitialize`);
 		};
 
