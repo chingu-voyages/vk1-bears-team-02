@@ -13,8 +13,7 @@ import "./styles.css";
 
 import PopOver from "./PopOver";
 
-mapboxgl.accessToken =
-	"pk.eyJ1IjoiaXZhbmZ1bmNpb24iLCJhIjoiY2s5NGd5NGphMDFucjNpbDJ6d285cjNociJ9.HBWvHMgpYyY53znT78H8bA";
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 // mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
@@ -155,12 +154,12 @@ const MapView = () => {
 			// 	]);
 			// }, 5000);
 
-			document.getElementById("bounce").addEventListener("click", () => {
-				map.fitBounds([
-					[32.958984, -5.353521],
-					[43.50585, 5.615985],
-				]);
-			});
+			// document.getElementById("bounce").addEventListener("click", () => {
+			// 	map.fitBounds([
+			// 		[32.958984, -5.353521],
+			// 		[43.50585, 5.615985],
+			// 	]);
+			// });
 
 			// Enable pusher logging - don't include this in production
 			Pusher.logToConsole = true;
@@ -239,10 +238,11 @@ const MapView = () => {
 			<div className="sidebarStyle">
 				<p>
 					Longitude: {initialView.lng} | Latitude: {initialView.lat} | Zoom :{" "}
-					{zoom} | current: longitute {currentCoordinates.lng.toFixed(4)} and
-					latitude : {currentCoordinates.lat.toFixed(4)}
+					{zoom} |
+					{/* current: longitute {currentCoordinates.lng.toFixed(4)} and
+					latitude : {currentCoordinates.lat.toFixed(4)} */}
 				</p>
-				<button id="bounce">bounce</button>
+				{/* <button id="bounce">bounce</button> */}
 
 				<div>
 					{/* <select
