@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import Nav from "../Nav/Nav";
 import Sidebar from "../Sidebar/Sidebar";
-import Map from "../Map/Map";
+import MapView from "../../MapView/MapView";
 
 function Dashboard() {
   const [status, setStatus] = useState("openedSidebar");
   return (
-    <main className="admin-page-container">
+    <main className="admin-page-container flex-wrap">
       <Nav status={status} setStatus={setStatus} />
-      <Sidebar status={status} />
-      <Map />
+      <div className="d-flex h-100">
+        <Sidebar status={status} />
+        <div style={{ height: "100%", width: "100%" }}>
+          <MapView />
+        </div>
+      </div>
     </main>
   );
 }
