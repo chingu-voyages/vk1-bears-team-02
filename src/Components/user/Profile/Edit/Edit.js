@@ -60,9 +60,14 @@ function Edit() {
             ref={register({ required: true })}
           />
         </Form.Group>
-        <Button className="rounded-pill font-weight-bolder" type="submit">
-          Save
-        </Button>
+        <div className="button-wrapper mt-3">
+          <button
+            className="btn btn-primary rounded-pill font-weight-bolder"
+            type="submit"
+          >
+            Save
+          </button>
+        </div>
       </Form>
     </main>
   );

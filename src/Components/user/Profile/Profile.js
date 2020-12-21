@@ -16,9 +16,14 @@ function Profile() {
           <h3>Email</h3>
           <p className="ml-5 font-italic">john@email.com</p>
           <a href="/user/edit" className="align-self-center mr-5">
-            <button className="rounded-pill font-weight-bolder">
-              Edit Info
-            </button>
+            <div className="button-wrapper mt-3">
+              <button
+                className="btn btn-primary rounded-pill font-weight-bolder"
+                type="submit"
+              >
+                Edit Info
+              </button>
+            </div>
           </a>
         </div>
         <div className="reports-wrapper mx-5 mt-4">
