@@ -4,12 +4,13 @@ import { AuthenticationContext } from "../context/AuthenticationContext";
 
 const PublicRoute = ({ component: Component, ...rest }) => {
 	const { authenticated } = useContext(AuthenticationContext);
+	var auth = localStorage.getItem('auth')
 
 	return (
 		<Route
 			{...rest}
 			component={(props) =>
-				authenticated ? <Redirect to="/user/flood" /> : <Component {...props} />
+				auth ? <Redirect to="/user/flood" /> : <Component {...props} />
 			}
 		/>
 	);
