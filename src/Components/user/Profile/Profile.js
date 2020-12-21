@@ -12,9 +12,7 @@ function Profile() {
       <div className="profile-wrapper pt-4">
         <div className="profile d-flex justify-content-center flex-column align-items-start mx-5">
           <h3>Username</h3>
-          <p className="ml-5 font-italic">john</p>
-          <h3>Email</h3>
-          <p className="ml-5 font-italic">john@email.com</p>
+          <p className="ml-5 font-italic">{localStorage.getItem('username')}</p>
           <a href="/user/edit" className="align-self-center mr-5">
             <div className="button-wrapper mt-3">
               <button

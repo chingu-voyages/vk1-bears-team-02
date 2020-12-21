@@ -1,19 +1,40 @@
-import React from "react";
+import React, { useContext } from 'react';
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import { AuthenticationContext } from "../../../context/AuthenticationContext";
+
+
 // Svg
 import backButton from "../../../Login/img/back-button.svg";
 
 function Edit() {
+  const { details, setDetails } = useContext(AuthenticationContext);
+
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    swal({
-      text: "Updated",
-      icon: "success",
-    });
+
+
+
+    try {
+      const response = axios.post("http://localhost:5000/update", {
+        oldusername: localStorage.getItem('username'),
+        username: data.username,
+        password: data.password,
+      });
+      console.log(response);
+      localStorage.setItem('username', data.username)
+      alert("Update Success")
+
+
+
+    } catch (error) {
+      console.error(`error:${error}`);
+    }
   };
   return (
     <main className="page-container register-page d-flex flex-column">

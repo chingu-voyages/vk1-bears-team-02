@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import Main from "./Components/Main/Main";
 import { Login } from "./Components/Login/Login";
+import { Test } from "./Components/Login/Test";
+
 import Register from "./Components/Register/Register";
 import Flood from "./Components/user/Flood/Flood";
 import Fire from "./Components/user/Fire/Fire";
