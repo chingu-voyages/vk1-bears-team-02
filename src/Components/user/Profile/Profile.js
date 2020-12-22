@@ -12,13 +12,18 @@ function Profile() {
       <div className="profile-wrapper pt-4">
         <div className="profile d-flex justify-content-center flex-column align-items-start mx-5">
           <h3>Username</h3>
-          <p className="ml-5 font-italic">john</p>
+          <p className="ml-5 font-italic">{localStorage.getItem("username")}</p>
           <h3>Email</h3>
-          <p className="ml-5 font-italic">john@email.com</p>
+          <p className="ml-5 font-italic">{localStorage.getItem("email")}</p>
           <a href="/user/edit" className="align-self-center mr-5">
-            <button className="rounded-pill font-weight-bolder">
-              Edit Info
-            </button>
+            <div className="button-wrapper mt-3">
+              <button
+                className="btn btn-primary rounded-pill font-weight-bolder"
+                type="submit"
+              >
+                Edit Info
+              </button>
+            </div>
           </a>
         </div>
         <div className="reports-wrapper mx-5 mt-4">

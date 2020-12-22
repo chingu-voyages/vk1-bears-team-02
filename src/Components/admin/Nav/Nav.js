@@ -15,6 +15,7 @@ function Nav({ status, setStatus }) {
           height: "7%",
           minHeight: "50px",
           boxShadow: "0px 12px 10px -11px rgba(0, 0, 0, 0.75)",
+          width: "100%",
         }}
       >
         <a href="/" onClick={handleClick}>

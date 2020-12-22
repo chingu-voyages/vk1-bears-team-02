@@ -9,6 +9,9 @@ import Earthquake from "./Components/user/Earthquake/Earthquake";
 import Profile from "./Components/user/Profile/Profile";
 import Edit from "./Components/user/Profile/Edit/Edit";
 import Dashboard from "./Components/admin/Dashboard/Dashboard";
+import Reports from "./Components/admin/Reports/Reports";
+import Analytics from "./Components/admin/Analytics/Analytics";
+import Management from "./Components/admin/Management/Management";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // Routes
@@ -46,6 +49,21 @@ const App = () => {
             exact
             path="/admin"
             component={Dashboard}
+          ></PrivateRoute>
+          <PrivateRoute
+            exact
+            path="/admin/reports"
+            component={Reports}
+          ></PrivateRoute>
+          <PrivateRoute
+            exact
+            path="/admin/analytics"
+            component={Analytics}
+          ></PrivateRoute>
+          <PrivateRoute
+            exact
+            path="/admin/management"
+            component={Management}
           ></PrivateRoute>
         </AuthenticationProvider>
       </Switch>

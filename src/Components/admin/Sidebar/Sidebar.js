@@ -14,6 +14,12 @@ function Sidebar({ status }) {
             <a href="/admin/reports">Report History</a>
           </li>
           <li>
+            <a href="/admin/management">User Management</a>
+          </li>
+          <li>
+            <a href="/admin/analytics">Data Analytics</a>
+          </li>
+          <li>
             <a href="/admin/login">Logout</a>
           </li>
         </ul>
