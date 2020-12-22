@@ -17,8 +17,9 @@ mapboxgl.accessToken =
 // mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 // const styles = {
-// 	// height: "100vh",
-// 	// position: "absolute",
+//   height: "100%",
+//   width:
+//   // position: "absolute",
 // };
 const markerHeight = 50,
   markerRadius = 10,
@@ -91,7 +92,8 @@ const MapView = () => {
         // 	geolocate.trigger();
         // });
         const geocoder = new MapboxGeocoder({
-          accessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,
+          accessToken:
+            "pk.eyJ1IjoiaXZhbmZ1bmNpb24iLCJhIjoiY2s5NGd5NGphMDFucjNpbDJ6d285cjNociJ9.HBWvHMgpYyY53znT78H8bA",
           mapboxgl: mapboxgl,
           color: "red",
         });
@@ -229,42 +231,42 @@ const MapView = () => {
 
         <div>
           {/* <select
-						onChange={(e) => {
-							setMapStyle(e.target.value);
-							console.log("yow ma man");
-							console.log(mapstyle);
-							alert(mapstyle);
-						}}
-						value={mapstyle}>
-						<option value="" disabled>
-							---map options---
-						</option>
-						<option value="mapbox://styles/mapbox/streets-v11">
-							Street mode
-						</option>
-						<option value="mapbox://styles/mapbox/dark-v10">Dark mode</option>
-						<option value="mapbox://styles/mapbox/outdoors-v11">
-							Outdor mode
-						</option>
-						<option value="mapbox://styles/mapbox/satellite-v9">
-							Satellite mode
-						</option>
-						<option value="mapbox://styles/mapbox/satellite-streets-v11">
-							Satellite street mode
-						</option>
-					</select> */}
+    				onChange={(e) => {
+    					setMapStyle(e.target.value);
+    					console.log("yow ma man");
+    					console.log(mapstyle);
+    					alert(mapstyle);
+    				}}
+    				value={mapstyle}>
+    				<option value="" disabled>
+    					---map options---
+    				</option>
+    				<option value="mapbox://styles/mapbox/streets-v11">
+    					Street mode
+    				</option>
+    				<option value="mapbox://styles/mapbox/dark-v10">Dark mode</option>
+    				<option value="mapbox://styles/mapbox/outdoors-v11">
+    					Outdor mode
+    				</option>
+    				<option value="mapbox://styles/mapbox/satellite-v9">
+    					Satellite mode
+    				</option>
+    				<option value="mapbox://styles/mapbox/satellite-streets-v11">
+    					Satellite street mode
+    				</option>
+    			</select> */}
           {/* <button
-						onClick={() => {
-							setMapStyle("mapbox://styles/mapbox/dark-v10");
-						}}>
-						Dark mode
-					</button>
-					<button
-						onClick={() => {
-							setMapStyle("mapbox://styles/mapbox/satellite-streets-v11");
-						}}>
-						Satellite street mode
-					</button> */}
+    				onClick={() => {
+    					setMapStyle("mapbox://styles/mapbox/dark-v10");
+    				}}>
+    				Dark mode
+    			</button>
+    			<button
+    				onClick={() => {
+    					setMapStyle("mapbox://styles/mapbox/satellite-streets-v11");
+    				}}>
+    				Satellite street mode
+    			</button> */}
 
           {/* https://codepen.io/roblabs/pen/zJjPzX */}
         </div>
