@@ -15,6 +15,8 @@ import backButton from "./img/back-button.svg";
 
 const Login = () => {
 	const { authenticated, setAuth } = useContext(AuthenticationContext);
+	const { details, setDetails } = useContext(AuthenticationContext);
+
 	const { register, handleSubmit } = useForm();
 
 	const onSubmit = (data) => {
@@ -36,8 +38,13 @@ const Login = () => {
 					const message = response.data.message;
 					if (message === "user login") {
 						setTimeout(function () {
-							setAuth(true);
-						}, 6000);
+							setDetails(data.username)
+							localStorage.setItem('auth', true)
+							localStorage.setItem('username', data.username)
+							setAuth(true)
+
+
+						}, 1000);
 
 						toast.success(`${message}`);
 					} else {
@@ -54,15 +61,19 @@ const Login = () => {
 		}
 	};
 
+
 	useEffect(() => {
+		let mounted = true
 		const getLoginData = async () => {
 			try {
 				const response = await axios.get(
 					"http://localhost:5000/auth/login/success"
 				);
 				console.log(response.data);
+				setAuth(true)
 			} catch (error) {
 				console.error(error);
+
 			}
 		};
 		// setTimeout(function () {
@@ -71,7 +82,9 @@ const Login = () => {
 		// }, 3000);
 
 		// getLoginData();
+		return () => mounted = false
 	}, []);
+
 
 	return (
 		<main className="page-container login-page">
@@ -113,7 +126,6 @@ const Login = () => {
 				</div>
 			</Form>
 			<Footer footerTitle="Don't have an account?" footerLink="Register" />
-
 			<ToastContainer />
 		</main>
 	);
