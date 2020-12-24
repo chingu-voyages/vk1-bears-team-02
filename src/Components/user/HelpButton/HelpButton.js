@@ -58,8 +58,8 @@ const HelpButton = ({ logo, disasterType }) => {
 					civilian: `5fcf8dc19e22ce1544064770`,
 					longitude: currentUserCoordinate.long,
 					latitude: currentUserCoordinate.lat,
-					description: "sdadadadasd",
-					title: "sdadadadasd",
+					// description: "sdadadadasd",
+					// title: "sdadadadasd",
 					disasterType: disasterType,
 				};
 
