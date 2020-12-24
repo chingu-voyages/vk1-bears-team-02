@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import Sidebar from "../Sidebar/Sidebar";
-import Map from "../Map/Map";
+import MapView from "../../MapView/MapView";
 
 import axios from "axios";
 
@@ -40,11 +40,15 @@ function Dashboard() {
 		});
 	}, []);
 	return (
-		<main className="admin-page-container">
+		<main className="admin-page-container flex-wrap">
 			<Nav status={status} setStatus={setStatus} />
-			<Sidebar status={status} />
-			<Map />
-			<ToastContainer />
+			<div className="d-flex h-100">
+				<Sidebar status={status} />
+				<div style={{ height: "100%", width: "100%" }}>
+					<MapView />
+					<ToastContainer />
+				</div>
+			</div>
 		</main>
 	);
 }

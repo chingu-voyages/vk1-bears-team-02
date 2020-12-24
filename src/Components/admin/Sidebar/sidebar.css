@@ -1,7 +1,7 @@
 @import "../../../style/colors.css";
 
 .sidebar-wrapper {
-  position: absolute;
+  /* position: absolute; */
   height: 100%;
   width: 20%;
   min-width: 188px;
@@ -10,7 +10,7 @@
 }
 
 .sidebar-nav {
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   width: 100%;
   margin: 0;
@@ -59,11 +59,13 @@
 }
 
 .closedSidebar {
-  transform: translateX(-100%);
-  transition-duration: 500ms;
+  display: none;
+  /* transform: translateX(-100%);
+  transition: all 500ms; */
 }
 
 .openedSidebar {
-  transform: translateX(0%);
-  transition-duration: 500ms;
+  display: block;
+  /* transform: translateX(0%);
+  transition-duration: 500ms; */
 }

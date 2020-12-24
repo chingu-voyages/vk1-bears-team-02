@@ -18,8 +18,9 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 // mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 // const styles = {
-// 	// height: "100vh",
-// 	// position: "absolute",
+//   height: "100%",
+//   width:
+//   // position: "absolute",
 // };
 const markerHeight = 50,
 	markerRadius = 10,
