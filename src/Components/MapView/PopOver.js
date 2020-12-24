@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Badge } from "react-bootstrap";
+import { Button, Badge, Table } from "react-bootstrap";
 import axios from "axios";
 
 import * as turf from "@turf/turf";
@@ -9,12 +9,13 @@ import "moment-timezone";
 
 export default function PopOver(props) {
 	const { datas } = props;
-	const { properties, geometry } = datas;
+	const { properties, geometry, civilian } = datas;
 	const { coordinates } = geometry;
 	const [lng, lat] = coordinates;
 	const [placeName, setPlaceName] = useState(null);
-	// const { properties, geometry } = data;
+	const [civilian_details] = civilian;
 
+	console.log(civilian_details);
 	console.log(`data: ${geometry.coordinates}`);
 	const [currentUserCoordinate, setCurrentUserCoordinate] = useState({
 		lat: 0,
@@ -109,7 +110,97 @@ export default function PopOver(props) {
 
 	return (
 		<>
-			<div>
+			<h3>Distress Call Details</h3>
+			<Table striped bordered hover>
+				<tbody>
+					<tr>
+						<th>Disaster type</th>
+						<td>
+							<strong>{properties.disasterType}</strong>
+						</td>
+					</tr>
+					<tr>
+						<th>Current Status</th>
+						<td>
+							<Badge
+								variant={
+									datas.status === `sent`
+										? `danger`
+										: datas.status === `acknowledge`
+										? `warning`
+										: `success`
+								}>
+								{datas.status}
+							</Badge>
+						</td>
+					</tr>
+
+					<tr>
+						<th>Distress call by:</th>
+						<td>
+							{`${civilian_details.givenName} ${civilian_details.familyName}`}
+						</td>
+					</tr>
+
+					<tr>
+						<th>Date Send</th>
+						<td>
+							<Moment
+								format="MMMM DD, YYYY hh:mm:ss A"
+								date={datas.date_send}
+							/>
+						</td>
+					</tr>
+
+					<tr>
+						<th>Date Responded</th>
+						<td>
+							{datas.date_send === datas.date_acknowledge ? (
+								"N/A"
+							) : (
+								<Moment
+									format="MMMM DD, YYYY hh:mm:ss A"
+									date={datas.date_acknowledge}
+								/>
+							)}
+						</td>
+					</tr>
+
+					<tr>
+						<th>Date Resolved</th>
+						<td>
+							{datas.date_send === datas.date_acknowledge ? (
+								"N/A"
+							) : datas.date_acknowledge === datas.date_resolved ? (
+								"N/A"
+							) : (
+								<Moment
+									format="MMMM DD, YYYY hh:mm:ss A"
+									date={datas.date_resolved}
+								/>
+							)}
+						</td>
+					</tr>
+				</tbody>
+			</Table>
+			<Button
+				variant={
+					datas.status === "sent"
+						? "danger"
+						: datas.status === "acknowledge"
+						? "info"
+						: "success"
+				}
+				onClick={() => {
+					respond(datas);
+				}}>
+				{datas.status === "sent"
+					? "Respond"
+					: datas.status === "acknowledge"
+					? "Mark as resolve"
+					: "Resolved"}
+			</Button>
+			{/* <div>
 				<h3>{properties.title}</h3>
 				<p>
 					<Badge
@@ -160,13 +251,23 @@ export default function PopOver(props) {
 				<p>Place Name: {placeName}</p>
 				<p>distance from your current position: {distance.toFixed(4)}Km</p>
 				<Button
-					variant="danger"
+					variant={
+						datas.status === "sent"
+							? "danger"
+							: datas.status === "acknowledge"
+							? "info"
+							: "success"
+					}
 					onClick={() => {
 						respond(datas);
 					}}>
-					respond
+					{datas.status === "sent"
+						? "Respond"
+						: datas.status === "acknowledge"
+						? "Mark as resolve"
+						: "Resolved"}
 				</Button>
-			</div>
+			</div> */}
 		</>
 	);
 }
