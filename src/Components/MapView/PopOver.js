@@ -4,6 +4,9 @@ import axios from "axios";
 
 import * as turf from "@turf/turf";
 
+import Moment from "react-moment";
+import "moment-timezone";
+
 export default function PopOver(props) {
 	const { datas } = props;
 	const { properties, geometry } = datas;
@@ -39,20 +42,33 @@ export default function PopOver(props) {
 		const sendResponse = async () => {
 			try {
 				let new_status = "";
+				let date = new Date();
 				if (property.status === "sent") {
 					new_status = "acknowledge";
+
+					const data = {
+						status: new_status,
+						date_acknowledge: date,
+					};
+					const response = await axios.put(
+						`http://localhost:5000/map-data/${property._id}`,
+						data
+					);
+					console.log(response);
 				} else if (property.status === "acknowledge") {
 					new_status = "resolved";
+
+					const data = {
+						status: new_status,
+						date_resolved: date,
+					};
+					const response = await axios.put(
+						`http://localhost:5000/map-data/${property._id}`,
+						data
+					);
+					console.log(response);
 				}
 
-				const data = {
-					status: new_status,
-				};
-				const response = await axios.put(
-					`http://localhost:5000/map-data/${property._id}`,
-					data
-				);
-				console.log(response);
 				// window.location.reload();
 				// .then(function (response) {
 				// 	console.log(response);
@@ -109,6 +125,35 @@ export default function PopOver(props) {
 				</p>
 				<p>{properties.disasterType}</p>
 				<p>{properties.description}</p>
+				<p>
+					Date send:
+					<Moment format="MMMM DD, YYYY hh:mm:ss A" date={datas.date_send} />
+				</p>
+
+				{datas.status === "acknowledgeent" ? (
+					<p>
+						Date responded:
+						<Moment
+							format="MMMM DD, YYYY hh:mm:ss A"
+							date={datas.date_acknowledge}
+						/>
+					</p>
+				) : (
+					""
+				)}
+
+				{datas.status === "resolved" ? (
+					<p>
+						Date resolved:
+						<Moment
+							format="MMMM DD, YYYY hh:mm:ss A"
+							date={datas.date_resolved}
+						/>
+					</p>
+				) : (
+					""
+				)}
+
 				<p>
 					Longitude:{lng} | Latitude: {lat}
 				</p>
