@@ -204,7 +204,7 @@ const MapView = () => {
 						} else if (data.properties.disasterType === "Fire") {
 							// alert("fire");
 							iconHandler.className = "marker-icon-fire-style";
-						} else if (data.properties.disasterType === "earthquake") {
+						} else if (data.properties.disasterType === "Earthquake") {
 							iconHandler.className = "marker-icon-earthquake-style";
 						}
 
