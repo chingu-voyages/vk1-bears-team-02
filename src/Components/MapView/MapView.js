@@ -245,7 +245,7 @@ const MapView = () => {
 			<div className="sidebarStyle">
 				<p>
 					Longitude: {initialView.lng} | Latitude: {initialView.lat} | Zoom :{" "}
-					{zoom} |
+					{zoom}
 					{/* current: longitute {currentCoordinates.lng.toFixed(4)} and
 					latitude : {currentCoordinates.lat.toFixed(4)} */}
 				</p>
