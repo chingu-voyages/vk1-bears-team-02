@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Badge } from "react-bootstrap";
 import axios from "axios";
+
 import * as turf from "@turf/turf";
 
 export default function PopOver(props) {
@@ -32,7 +33,7 @@ export default function PopOver(props) {
 	}, []);
 
 	const respond = (property) => {
-		alert(property._id);
+		// alert(property._id);
 		console.log(property);
 
 		const sendResponse = async () => {
@@ -52,7 +53,7 @@ export default function PopOver(props) {
 					data
 				);
 				console.log(response);
-				window.location.reload();
+				// window.location.reload();
 				// .then(function (response) {
 				// 	console.log(response);
 				// 	window.location.reload();
