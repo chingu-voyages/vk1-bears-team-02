@@ -122,7 +122,7 @@ export default function PopOver(props) {
 					<tr>
 						<th>Current Status</th>
 						<td>
-							<Badge
+							{/* <Badge
 								variant={
 									datas.status === `sent`
 										? `danger`
@@ -131,7 +131,15 @@ export default function PopOver(props) {
 										: `success`
 								}>
 								{datas.status}
-							</Badge>
+							</Badge> */}
+
+							{datas.status === `sent`
+								? `On Going`
+								: datas.status === `acknowledge`
+								? `Dispatch help`
+								: datas.status === `acknowledge`
+								? `Clear`
+								: ""}
 						</td>
 					</tr>
 
