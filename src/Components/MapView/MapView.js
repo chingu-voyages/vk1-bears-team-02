@@ -188,6 +188,7 @@ const MapView = () => {
 						let popup = new mapboxgl.Popup({
 							offset: popupOffsets,
 							className: "popover-style",
+							maxWidth: "300px",
 						})
 							.setLngLat(data.geometry.coordinates)
 							//.setHTML(<PopOver message="ivan" />)
