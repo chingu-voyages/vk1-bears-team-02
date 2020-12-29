@@ -14,10 +14,10 @@ function Dashboard() {
 	const [status, setStatus] = useState("openedSidebar");
 
 	useEffect(() => {
-		// const getLatestMapData = async()=>{
+		const getLatestMapData = async () => {
 
-		//   const data = await axios.get(`http://localhost:5000/map-data`);
-		// }
+			const data = await axios.get(`http://localhost:5000/map-data`);
+		}
 
 		Pusher.logToConsole = true;
 

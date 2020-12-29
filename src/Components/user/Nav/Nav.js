@@ -3,7 +3,6 @@ import { AuthenticationContext } from "../../context/AuthenticationContext";
 import "./nav.css";
 
 const Nav = () => {
-  const { setAuth } = useContext(AuthenticationContext);
   const [status, setStatus] = useState("close");
   const changeStatus = (e) => {
     e.preventDefault();
@@ -11,7 +10,9 @@ const Nav = () => {
   };
   const logout = (e) => {
     e.preventDefault();
-    setAuth(false);
+    localStorage.clear()
+    window.location.reload();
+
   };
   return (
     <nav className="user-navbar">
