@@ -4,6 +4,8 @@ import axios from "axios";
 
 import * as turf from "@turf/turf";
 
+import Pusher from "pusher-js";
+
 import Moment from "react-moment";
 import "moment-timezone";
 
@@ -15,7 +17,10 @@ export default function PopOver(props) {
 	const [placeName, setPlaceName] = useState(null);
 	const [civilian_details] = civilian;
 
-	console.log(civilian_details);
+	const [status, setStatus] = useState(datas.status);
+
+	const [dateResponded, setDateResponded] = useState(null);
+
 	console.log(`data: ${geometry.coordinates}`);
 	const [currentUserCoordinate, setCurrentUserCoordinate] = useState({
 		lat: 0,
@@ -34,7 +39,25 @@ export default function PopOver(props) {
 				});
 			});
 		}
-	}, []);
+
+		// Enable pusher logging - don't include this in production
+		Pusher.logToConsole = true;
+
+		//change this to your pusher key
+		const pusher = new Pusher("b74a80c7be8fd2b220d7", {
+			cluster: "us3",
+		});
+
+		const channel2 = pusher.subscribe("map-data-update");
+		channel2.bind("map-data-update-event", function (data) {
+			console.log(data.data.status);
+			setStatus(data.data.status);
+
+			if (status !== "acknowledge" && status !== "resolved") {
+				setDateResponded(data.data.date_acknowledge);
+			}
+		});
+	}, [status]);
 
 	const respond = (property) => {
 		// alert(property._id);
@@ -133,13 +156,15 @@ export default function PopOver(props) {
 								{datas.status}
 							</Badge> */}
 
-							{datas.status === `sent`
+							{status === `sent`
 								? `On Going`
-								: datas.status === `acknowledge`
+								: status === `acknowledge`
 								? `Dispatch help`
-								: datas.status === `acknowledge`
+								: status === `resolved`
 								? `Clear`
 								: ""}
+
+							{}
 						</td>
 					</tr>
 
@@ -163,32 +188,25 @@ export default function PopOver(props) {
 					<tr>
 						<th>Date Responded</th>
 						<td>
-							{datas.date_send === datas.date_acknowledge ? (
-								"N/A"
-							) : (
+							{status !== "sent" ? (
 								<Moment
 									format="MMMM DD, YYYY hh:mm:ss A"
-									date={datas.date_acknowledge}
+									date={dateResponded}
 								/>
+							) : (
+								""
 							)}
 						</td>
 					</tr>
 
-					<tr>
+					{/* <tr>
 						<th>Date Resolved</th>
 						<td>
-							{datas.date_send === datas.date_acknowledge ? (
-								"N/A"
-							) : datas.date_acknowledge === datas.date_resolved ? (
-								"N/A"
-							) : (
-								<Moment
-									format="MMMM DD, YYYY hh:mm:ss A"
-									date={datas.date_resolved}
-								/>
-							)}
+							
+
+						
 						</td>
-					</tr>
+					</tr> */}
 				</tbody>
 			</Table>
 			<Button
