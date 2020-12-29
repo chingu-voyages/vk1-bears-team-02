@@ -4,6 +4,9 @@ import Sidebar from "../Sidebar/Sidebar";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 
+import Moment from "react-moment";
+import "moment-timezone";
+
 import GeoCoding from "./GeoCoding";
 
 import { Container, Row, Col, Table } from "react-bootstrap";
@@ -178,7 +181,12 @@ function Reports() {
 													<td>{data.civilian[0].email}</td>
 													<td>{data.properties.disasterType}</td>
 													<td>{data.status}</td>
-													<td>{data.date_send}</td>
+													<td>
+														<Moment
+															format="MMMM DD, YYYY hh:mm:ss A"
+															date={data.date_send}
+														/>
+													</td>
 													<td>
 														<strong>Longitude</strong>
 														{`: ${data.geometry.coordinates[0].toFixed(2)} `}
