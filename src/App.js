@@ -12,6 +12,7 @@ import Dashboard from "./Components/admin/Dashboard/Dashboard";
 import Reports from "./Components/admin/Reports/Reports";
 import Analytics from "./Components/admin/Analytics/Analytics";
 import Management from "./Components/admin/Management/Management";
+import AdminLogin from "./Components/admin/Login/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // Routes
@@ -64,6 +65,11 @@ const App = () => {
             exact
             path="/admin/management"
             component={Management}
+          ></PrivateRoute>
+          <PrivateRoute
+            exact
+            path="/admin/login"
+            component={AdminLogin}
           ></PrivateRoute>
         </AuthenticationProvider>
       </Switch>
