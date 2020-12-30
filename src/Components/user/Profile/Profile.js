@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 // style
 import "./profile.css";
@@ -6,6 +7,18 @@ import "./profile.css";
 import Nav from "../Nav/Nav";
 
 function Profile() {
+  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState(localStorage.getItem("username"))
+
+
+  async function re() {
+    await axios.get("http://localhost:5000/user/" + username, {
+
+    }).then((response) => {
+      setEmail(response.data.data)
+    })
+  };
+  re()
   return (
     <main className="page-container">
       <Nav />
@@ -14,7 +27,7 @@ function Profile() {
           <h3>Username</h3>
           <p className="ml-5 font-italic">{localStorage.getItem("username")}</p>
           <h3>Email</h3>
-          <p className="ml-5 font-italic">{localStorage.getItem("email")}</p>
+          <p className="ml-5 font-italic">{email}</p>
           <a href="/user/edit" className="align-self-center mr-5">
             <div className="button-wrapper mt-3">
               <button

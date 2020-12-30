@@ -19,13 +19,15 @@ function Edit() {
 
     try {
       const response = axios.post("http://localhost:5000/update", {
-        oldusername: localStorage.getItem("username"),
+        oldUsername: localStorage.getItem("username"),
         username: data.username,
         password: data.password,
       });
-      console.log(response);
-      localStorage.setItem("username", data.username);
+      console.log(localStorage.getItem("username"));
+
       alert("Update Success");
+      localStorage.setItem('username', data.username)
+
     } catch (error) {
       console.error(`error:${error}`);
     }

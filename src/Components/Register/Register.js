@@ -46,6 +46,8 @@ const Register = () => {
           if (message === "user added") {
             setTimeout(function () {
               setAuth(true);
+              localStorage.setItem('auth', true)
+              localStorage.setItem('username', data.username)
             }, 6000);
             toast.success(`You are now registered!`);
           } else {
