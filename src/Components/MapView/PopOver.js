@@ -50,6 +50,8 @@ export default function PopOver(props) {
 
 		const channel2 = pusher.subscribe("map-data-update");
 		channel2.bind("map-data-update-event", function (data) {
+			console.log(data.data);
+			console.log(`status mo ${data.data.status}`);
 			setStatus(data.data.status);
 
 			if (status !== "acknowledge" && status !== "resolved") {
