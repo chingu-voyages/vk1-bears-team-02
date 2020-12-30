@@ -50,7 +50,6 @@ export default function PopOver(props) {
 
 		const channel2 = pusher.subscribe("map-data-update");
 		channel2.bind("map-data-update-event", function (data) {
-			console.log(data.data.status);
 			setStatus(data.data.status);
 
 			if (status !== "acknowledge" && status !== "resolved") {
@@ -60,9 +59,6 @@ export default function PopOver(props) {
 	}, [status]);
 
 	const respond = (property) => {
-		// alert(property._id);
-		console.log(property);
-
 		const sendResponse = async () => {
 			try {
 				let new_status = "";
@@ -137,6 +133,12 @@ export default function PopOver(props) {
 			<Table striped bordered hover>
 				<tbody>
 					<tr>
+						<th>Location</th>
+						<td>
+							<strong>{placeName}</strong>
+						</td>
+					</tr>
+					<tr>
 						<th>Disaster type</th>
 						<td>
 							<strong>{properties.disasterType}</strong>
@@ -198,34 +200,27 @@ export default function PopOver(props) {
 							)}
 						</td>
 					</tr>
-
-					{/* <tr>
-						<th>Date Resolved</th>
-						<td>
-							
-
-						
-						</td>
-					</tr> */}
 				</tbody>
 			</Table>
-			<Button
-				variant={
-					datas.status === "sent"
-						? "danger"
-						: datas.status === "acknowledge"
-						? "info"
-						: "success"
-				}
-				onClick={() => {
-					respond(datas);
-				}}>
-				{datas.status === "sent"
-					? "Respond"
-					: datas.status === "acknowledge"
-					? "Mark as resolve"
-					: "Resolved"}
-			</Button>
+			{status !== "resolved" && (
+				<Button
+					variant={
+						status === "sent"
+							? "danger"
+							: status === "acknowledge"
+							? "info"
+							: "success"
+					}
+					onClick={() => {
+						respond(datas);
+					}}>
+					{status === "sent"
+						? "Respond"
+						: status === "acknowledge"
+						? "Mark as resolve"
+						: "Resolved"}
+				</Button>
+			)}
 			{/* <div>
 				<h3>{properties.title}</h3>
 				<p>
