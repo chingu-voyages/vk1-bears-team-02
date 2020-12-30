@@ -147,6 +147,13 @@ export default function PopOver(props) {
 						</td>
 					</tr>
 					<tr>
+						<th>Distance from my location</th>
+						<td>
+							<strong>{distance}</strong>
+						</td>
+					</tr>
+
+					<tr>
 						<th>Current Status</th>
 						<td>
 							{/* <Badge
