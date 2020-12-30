@@ -46,6 +46,8 @@ const MapView = () => {
 
 	const [mapState, setMap] = useState(null);
 
+	const [featureData, setFeatureData] = useState(null);
+
 	const [initialView, setInitialView] = useState({
 		lng: 120.9842,
 		lat: 14.5995,
@@ -177,6 +179,7 @@ const MapView = () => {
 					const data = await axios.get(`http://localhost:5000/map-data`);
 
 					const features = data.data.features;
+
 					features.forEach((data) => {
 						console.log(data.geometry.coordinates);
 
