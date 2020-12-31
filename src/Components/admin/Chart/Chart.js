@@ -109,7 +109,7 @@ export default function Chart() {
 				<Row>
 					<Col>
 						<div className="chart-container">
-							<Bar
+							<Pie
 								data={chartData}
 								options={{
 									maintainAspectRatio: true,
@@ -134,7 +134,7 @@ export default function Chart() {
 							/>
 						</div>
 					</Col>
-					<Col>
+					{/* <Col>
 						<div className="chart-container">
 							<Doughnut
 								data={chartData}
@@ -155,10 +155,10 @@ export default function Chart() {
 								//   }}
 							/>
 						</div>
-					</Col>
+					</Col> */}
 				</Row>
 
-				<Row style={{ marginTop: "50px" }}>
+				{/* <Row style={{ marginTop: "50px" }}>
 					<Col>
 						<div className="chart-container">
 							<Line
@@ -208,7 +208,7 @@ export default function Chart() {
 							/>
 						</div>
 					</Col>
-				</Row>
+				</Row> */}
 			</Container>
 		</>
 	);

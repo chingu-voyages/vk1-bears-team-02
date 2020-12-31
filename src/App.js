@@ -13,6 +13,7 @@ import Dashboard from "./Components/admin/Dashboard/Dashboard";
 import Reports from "./Components/admin/Reports/Reports";
 import Analytics from "./Components/admin/Analytics/Analytics";
 import Management from "./Components/admin/Management/Management";
+import AdminLogin from "./Components/admin/Login/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // Routes
@@ -22,55 +23,49 @@ import PrivateRoute from "./Components/routes/PrivateRoute";
 import { AuthenticationProvider } from "./Components/context/AuthenticationContext";
 
 const App = () => {
-  return (
-    <Router>
-      <Switch>
-        <AuthenticationProvider>
-          <PublicRoute exact path="/" component={Main}></PublicRoute>
-          <PublicRoute exact path="/Login" component={Login}></PublicRoute>
-          <PublicRoute
-            exact
-            path="/Register"
-            component={Register}
-          ></PublicRoute>
-          <PrivateRoute
-            exact
-            path="/user/flood"
-            component={Flood}
-          ></PrivateRoute>
-          <PrivateRoute exact path="/user/fire" component={Fire}></PrivateRoute>
-          <PrivateRoute
-            exact
-            path="/user/earthquake"
-            component={Earthquake}
-          ></PrivateRoute>
-          <PrivateRoute exact path="/user" component={Profile}></PrivateRoute>
-          <PrivateRoute exact path="/user/edit" component={Edit}></PrivateRoute>
-          <PrivateRoute exact path="/user/map" component={Map}></PrivateRoute>
-          <PrivateRoute
-            exact
-            path="/admin"
-            component={Dashboard}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path="/admin/reports"
-            component={Reports}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path="/admin/analytics"
-            component={Analytics}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path="/admin/management"
-            component={Management}
-          ></PrivateRoute>
-        </AuthenticationProvider>
-      </Switch>
-    </Router>
-  );
+	return (
+		<Router>
+			<Switch>
+				<AuthenticationProvider>
+					<PublicRoute exact path="/" component={Main}></PublicRoute>
+					<PublicRoute exact path="/Login" component={Login}></PublicRoute>
+					<PublicRoute exact path="/login/:id" component={Login}></PublicRoute>
+					<PublicRoute
+						exact
+						path="/Register"
+						component={Register}></PublicRoute>
+					<PrivateRoute
+						exact
+						path="/user/flood"
+						component={Flood}></PrivateRoute>
+					<PrivateRoute exact path="/user/fire" component={Fire}></PrivateRoute>
+					<PrivateRoute
+						exact
+						path="/user/earthquake"
+						component={Earthquake}></PrivateRoute>
+					<PrivateRoute exact path="/user" component={Profile}></PrivateRoute>
+					<PrivateRoute exact path="/user/edit" component={Edit}></PrivateRoute>
+					<PrivateRoute exact path="/user/map" component={Map}></PrivateRoute>
+					<PrivateRoute
+						exact
+						path="/admin"
+						component={Dashboard}></PrivateRoute>
+					<PrivateRoute
+						exact
+						path="/admin/reports"
+						component={Reports}></PrivateRoute>
+					<PrivateRoute
+						exact
+						path="/admin/analytics"
+						component={Analytics}></PrivateRoute>
+					<PrivateRoute
+						exact
+						path="/admin/management"
+						component={Management}></PrivateRoute>
+				</AuthenticationProvider>
+			</Switch>
+		</Router>
+	);
 };
 
 export default App;

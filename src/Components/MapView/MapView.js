@@ -23,238 +23,241 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 //   // position: "absolute",
 // };
 const markerHeight = 50,
-  markerRadius = 10,
-  linearOffset = 25;
+	markerRadius = 10,
+	linearOffset = 25;
 
 const popupOffsets = {
-  top: [0, 0],
-  topLeft: [0, 0],
-  topRight: [0, 0],
-  bottom: [0, -markerHeight],
-  bottomLeft: [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-  bottomRight: [
-    -linearOffset,
-    (markerHeight - markerRadius + linearOffset) * -1,
-  ],
-  left: [markerRadius, (markerHeight - markerRadius) * -1],
-  right: [-markerRadius, (markerHeight - markerRadius) * -1],
+	top: [0, 0],
+	topLeft: [0, 0],
+	topRight: [0, 0],
+	bottom: [0, -markerHeight],
+	bottomLeft: [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+	bottomRight: [
+		-linearOffset,
+		(markerHeight - markerRadius + linearOffset) * -1,
+	],
+	left: [markerRadius, (markerHeight - markerRadius) * -1],
+	right: [-markerRadius, (markerHeight - markerRadius) * -1],
 };
 
 const MapView = () => {
-  //example user
-  const [user, setUser] = useState("user");
+	//example user
+	const [user, setUser] = useState("user");
 
-  const [mapState, setMap] = useState(null);
+	const [mapState, setMap] = useState(null);
 
-  const [initialView, setInitialView] = useState({
-    lng: 120.9842,
-    lat: 14.5995,
-  });
+	const [featureData, setFeatureData] = useState(null);
 
-  const [zoom, setZoom] = useState(5);
+	const [initialView, setInitialView] = useState({
+		lng: 120.9842,
+		lat: 14.5995,
+	});
 
-  const [tiltAngle, setTiltAngle] = useState(1);
+	const [zoom, setZoom] = useState(5);
 
-  //  mapbox://styles/ivanfuncion/cki63927r0otl19t2eazqn8wq
-  const [mapstyle, setMapStyle] = useState("mapbox://styles/mapbox/dark-v10");
+	const [tiltAngle, setTiltAngle] = useState(1);
 
-  const [currentCoordinates, setCurrentCoordinates] = useState({
-    lng: 0,
-    lat: 0,
-  });
+	//  mapbox://styles/ivanfuncion/cki63927r0otl19t2eazqn8wq
+	const [mapstyle, setMapStyle] = useState("mapbox://styles/mapbox/dark-v10");
 
-  const mapContainer = useRef(null);
+	const [currentCoordinates, setCurrentCoordinates] = useState({
+		lng: 0,
+		lat: 0,
+	});
 
-  useEffect(() => {
-    const initializeMap = ({ setMap, mapContainer }) => {
-      const map = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: mapstyle,
-        center: [initialView.lng, initialView.lat],
-        zoom: zoom,
-        // pitch: tiltAngle,
-      });
+	const mapContainer = useRef(null);
 
-      if (user === "admin") {
-      } else {
-        // Initialize the geolocate control.
-        let geolocate = new mapboxgl.GeolocateControl({
-          positionOptions: {
-            enableHighAccuracy: true,
-          },
-          trackUserLocation: true,
-          showUserLocation: false,
-        });
-        // Add the control to the map.
-        map.addControl(geolocate, "bottom-left");
-        // geolocate.trigger(alert("trigger"));
+	useEffect(() => {
+		const initializeMap = ({ setMap, mapContainer }) => {
+			const map = new mapboxgl.Map({
+				container: mapContainer.current,
+				style: mapstyle,
+				center: [initialView.lng, initialView.lat],
+				zoom: zoom,
+				// pitch: tiltAngle,
+			});
 
-        // document.getElementById("trigger").addEventListener("click", () => {
-        // 	geolocate.trigger();
-        // });
-        const geocoder = new MapboxGeocoder({
-          accessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,
-          mapboxgl: mapboxgl,
-          color: "red",
-        });
-        console.log(geocoder);
-        map.addControl(geocoder);
+			if (user === "admin") {
+			} else {
+				// Initialize the geolocate control.
+				let geolocate = new mapboxgl.GeolocateControl({
+					positionOptions: {
+						enableHighAccuracy: true,
+					},
+					trackUserLocation: true,
+					showUserLocation: false,
+				});
+				// Add the control to the map.
+				map.addControl(geolocate, "bottom-left");
+				// geolocate.trigger(alert("trigger"));
 
-        // get your current coordinates
-        geolocate.on("geolocate", (e) => {
-          var lng = e.coords.longitude;
-          var lat = e.coords.latitude;
-          var position = [lng, lat];
-          console.log(position);
+				// document.getElementById("trigger").addEventListener("click", () => {
+				// 	geolocate.trigger();
+				// });
+				const geocoder = new MapboxGeocoder({
+					accessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,
+					mapboxgl: mapboxgl,
+					color: "red",
+				});
+				console.log(geocoder);
+				map.addControl(geocoder);
 
-          setCurrentCoordinates({
-            lng: lng,
-            lat: lat,
-          });
+				// get your current coordinates
+				geolocate.on("geolocate", (e) => {
+					var lng = e.coords.longitude;
+					var lat = e.coords.latitude;
+					var position = [lng, lat];
+					console.log(position);
 
-          var iconHandler = document.createElement("div");
-          iconHandler.className = "marker-icon-current-coordinate-user-style";
+					setCurrentCoordinates({
+						lng: lng,
+						lat: lat,
+					});
 
-          new mapboxgl.Marker(iconHandler).setLngLat([lng, lat]).addTo(map);
-        });
-      }
+					var iconHandler = document.createElement("div");
+					iconHandler.className = "marker-icon-current-coordinate-user-style";
 
-      // add navigation control (zoom buttons)
-      let navigationControl = new mapboxgl.NavigationControl();
-      map.addControl(navigationControl, "bottom-right");
+					new mapboxgl.Marker(iconHandler).setLngLat([lng, lat]).addTo(map);
+				});
+			}
 
-      // add fullscreen control
-      // map.addControl(new mapboxgl.FullscreenControl());
+			// add navigation control (zoom buttons)
+			let navigationControl = new mapboxgl.NavigationControl();
+			map.addControl(navigationControl, "bottom-right");
 
-      map.on("load", () => {
-        setMap(map);
+			// add fullscreen control
+			// map.addControl(new mapboxgl.FullscreenControl());
 
-        map.resize();
-      });
+			map.on("load", () => {
+				setMap(map);
 
-      map.on("move", () => {
-        setInitialView({
-          lng: map.getCenter().lng.toFixed(4),
-          lat: map.getCenter().lat.toFixed(4),
-          // zoom: map.getZoom().toFixed(4),
-          // pitch: initialView.pitch,
-        });
+				map.resize();
+			});
 
-        setZoom(map.getZoom().toFixed(4));
-      });
+			map.on("move", () => {
+				setInitialView({
+					lng: map.getCenter().lng.toFixed(4),
+					lat: map.getCenter().lat.toFixed(4),
+					// zoom: map.getZoom().toFixed(4),
+					// pitch: initialView.pitch,
+				});
 
-      //not used
-      map.on("mouseleave", "water", function () {
-        console.log("A mouseleave event occurred.");
-      });
+				setZoom(map.getZoom().toFixed(4));
+			});
 
-      // setTimeout(() => {
-      // 	map.fitBounds([
-      // 		[32.958984, -5.353521],
-      // 		[43.50585, 5.615985],
-      // 	]);
-      // }, 5000);
+			//not used
+			map.on("mouseleave", "water", function () {
+				console.log("A mouseleave event occurred.");
+			});
 
-      // document.getElementById("bounce").addEventListener("click", () => {
-      // 	map.fitBounds([
-      // 		[32.958984, -5.353521],
-      // 		[43.50585, 5.615985],
-      // 	]);
-      // });
+			// setTimeout(() => {
+			// 	map.fitBounds([
+			// 		[32.958984, -5.353521],
+			// 		[43.50585, 5.615985],
+			// 	]);
+			// }, 5000);
 
-      // Enable pusher logging - don't include this in production
-      Pusher.logToConsole = true;
+			// document.getElementById("bounce").addEventListener("click", () => {
+			// 	map.fitBounds([
+			// 		[32.958984, -5.353521],
+			// 		[43.50585, 5.615985],
+			// 	]);
+			// });
 
-      //change this to your pusher key
-      const pusher = new Pusher("b74a80c7be8fd2b220d7", {
-        cluster: "us3",
-      });
+			// Enable pusher logging - don't include this in production
+			Pusher.logToConsole = true;
 
-      const getAllCoordinates = async () => {
-        try {
-          console.log("call this");
+			//change this to your pusher key
+			const pusher = new Pusher("b74a80c7be8fd2b220d7", {
+				cluster: "us3",
+			});
 
-          const data = await axios.get(`http://localhost:5000/map-data`);
+			const getAllCoordinates = async () => {
+				try {
+					console.log("call this");
 
-          const features = data.data.features;
-          features.forEach((data) => {
-            console.log(data.geometry.coordinates);
+					const data = await axios.get(`http://localhost:5000/map-data`);
 
-            let popupHolder = document.createElement("div");
-            ReactDOM.render(
-              <PopOver feature="scooby" datas={data} />,
-              popupHolder
-            );
-            let popup = new mapboxgl.Popup({
-              offset: popupOffsets,
-              className: "popover-style",
-              maxWidth: "300px",
-            })
-              .setLngLat(data.geometry.coordinates)
-              //.setHTML(<PopOver message="ivan" />)
-              // .setHTML(`<p>${data.properties.message}</p>`)
-              .setDOMContent(popupHolder);
-            // .setMaxWidth("320px")
-            // .addTo(map);
+					const features = data.data.features;
 
-            // create a HTML element for each feature
-            console.log(data.properties.disasterType);
-            var iconHandler = document.createElement("div");
-            if (data.properties.disasterType === "Flood") {
-              iconHandler.className = "marker-icon-flood-style";
-            } else if (data.properties.disasterType === "Fire") {
-              // alert("fire");
-              iconHandler.className = "marker-icon-fire-style";
-            } else if (data.properties.disasterType === "Earthquake") {
-              iconHandler.className = "marker-icon-earthquake-style";
-            }
+					features.forEach((data) => {
+						console.log(data.geometry.coordinates);
 
-            new mapboxgl.Marker(iconHandler)
-              .setLngLat(data.geometry.coordinates)
-              .addTo(map)
-              .setPopup(popup);
-          });
-        } catch (error) {
-          console.log(error);
-        }
-      };
+						let popupHolder = document.createElement("div");
+						ReactDOM.render(
+							<PopOver feature="scooby" datas={data} />,
+							popupHolder
+						);
+						let popup = new mapboxgl.Popup({
+							offset: popupOffsets,
+							className: "popover-style",
+							maxWidth: "300px",
+						})
+							.setLngLat(data.geometry.coordinates)
+							//.setHTML(<PopOver message="ivan" />)
+							// .setHTML(`<p>${data.properties.message}</p>`)
+							.setDOMContent(popupHolder);
+						// .setMaxWidth("320px")
+						// .addTo(map);
 
-      //init load
-      getAllCoordinates();
+						// create a HTML element for each feature
+						console.log(data.properties.disasterType);
+						var iconHandler = document.createElement("div");
+						if (data.properties.disasterType === "Flood") {
+							iconHandler.className = "marker-icon-flood-style";
+						} else if (data.properties.disasterType === "Fire") {
+							// alert("fire");
+							iconHandler.className = "marker-icon-fire-style";
+						} else if (data.properties.disasterType === "Earthquake") {
+							iconHandler.className = "marker-icon-earthquake-style";
+						}
 
-      const channel = pusher.subscribe("map-data-create");
-      channel.bind("map-data-create-event", function (data) {
-        getAllCoordinates();
-      });
+						new mapboxgl.Marker(iconHandler)
+							.setLngLat(data.geometry.coordinates)
+							.addTo(map)
+							.setPopup(popup);
+					});
+				} catch (error) {
+					console.log(error);
+				}
+			};
 
-      const channel2 = pusher.subscribe("map-data-update");
-      channel2.bind("map-data-update-event", function (data) {
-        getAllCoordinates();
-      });
+			//init load
+			getAllCoordinates();
 
-      // console.log(`reinitialize`);
-    };
+			const channel = pusher.subscribe("map-data-create");
+			channel.bind("map-data-create-event", function (data) {
+				getAllCoordinates();
+			});
 
-    if (!mapState) initializeMap({ setMap, mapContainer });
-  }, [mapState]);
+			const channel2 = pusher.subscribe("map-data-update");
+			channel2.bind("map-data-update-event", function (data) {
+				getAllCoordinates();
+			});
 
-  return (
-    <div className="map-container">
-      <div
-        ref={(element) => (mapContainer.current = element)}
-        className="map-renderer"
-      />
-      <div className="sidebarStyle">
-        <p>
-          Longitude: {initialView.lng} | Latitude: {initialView.lat} | Zoom :{" "}
-          {zoom}
-          {/* current: longitute {currentCoordinates.lng.toFixed(4)} and
+			// console.log(`reinitialize`);
+		};
+
+		if (!mapState) initializeMap({ setMap, mapContainer });
+	}, [mapState]);
+
+	return (
+		<div className="map-container">
+			<div
+				ref={(element) => (mapContainer.current = element)}
+				className="map-renderer"
+			/>
+			<div className="sidebarStyle">
+				<p>
+					Longitude: {initialView.lng} | Latitude: {initialView.lat} | Zoom :{" "}
+					{zoom}
+					{/* current: longitute {currentCoordinates.lng.toFixed(4)} and
 					latitude : {currentCoordinates.lat.toFixed(4)} */}
-        </p>
-        {/* <button id="bounce">bounce</button> */}
+				</p>
+				{/* <button id="bounce">bounce</button> */}
 
-        <div>
-          {/* <select
+				<div>
+					{/* <select
 						onChange={(e) => {
 							setMapStyle(e.target.value);
 							console.log("yow ma man");
@@ -279,7 +282,7 @@ const MapView = () => {
 							Satellite street mode
 						</option>
 					</select> */}
-          {/* <button
+					{/* <button
 						onClick={() => {
 							setMapStyle("mapbox://styles/mapbox/dark-v10");
 						}}>
@@ -292,11 +295,11 @@ const MapView = () => {
 						Satellite street mode
 					</button> */}
 
-          {/* https://codepen.io/roblabs/pen/zJjPzX */}
-        </div>
-      </div>
-    </div>
-  );
+					{/* https://codepen.io/roblabs/pen/zJjPzX */}
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default MapView;
