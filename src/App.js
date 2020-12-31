@@ -8,6 +8,7 @@ import Fire from "./Components/user/Fire/Fire";
 import Earthquake from "./Components/user/Earthquake/Earthquake";
 import Profile from "./Components/user/Profile/Profile";
 import Edit from "./Components/user/Profile/Edit/Edit";
+import Map from "./Components/user/Map/Map";
 import Dashboard from "./Components/admin/Dashboard/Dashboard";
 import Reports from "./Components/admin/Reports/Reports";
 import Analytics from "./Components/admin/Analytics/Analytics";
@@ -28,6 +29,7 @@ const App = () => {
 				<AuthenticationProvider>
 					<PublicRoute exact path="/" component={Main}></PublicRoute>
 					<PublicRoute exact path="/Login" component={Login}></PublicRoute>
+					<PublicRoute exact path="/login/:id" component={Login}></PublicRoute>
 					<PublicRoute
 						exact
 						path="/Register"
@@ -41,9 +43,9 @@ const App = () => {
 						exact
 						path="/user/earthquake"
 						component={Earthquake}></PrivateRoute>
-					<PublicRoute exact path="/login/:id" component={Login}></PublicRoute>
 					<PrivateRoute exact path="/user" component={Profile}></PrivateRoute>
 					<PrivateRoute exact path="/user/edit" component={Edit}></PrivateRoute>
+					<PrivateRoute exact path="/user/map" component={Map}></PrivateRoute>
 					<PrivateRoute
 						exact
 						path="/admin"
@@ -60,10 +62,6 @@ const App = () => {
 						exact
 						path="/admin/management"
 						component={Management}></PrivateRoute>
-					<PrivateRoute
-						exact
-						path="/admin/login"
-						component={AdminLogin}></PrivateRoute>
 				</AuthenticationProvider>
 			</Switch>
 		</Router>
