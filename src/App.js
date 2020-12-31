@@ -8,6 +8,7 @@ import Fire from "./Components/user/Fire/Fire";
 import Earthquake from "./Components/user/Earthquake/Earthquake";
 import Profile from "./Components/user/Profile/Profile";
 import Edit from "./Components/user/Profile/Edit/Edit";
+import Map from "./Components/user/Map/Map";
 import Dashboard from "./Components/admin/Dashboard/Dashboard";
 import Reports from "./Components/admin/Reports/Reports";
 import Analytics from "./Components/admin/Analytics/Analytics";
@@ -45,6 +46,7 @@ const App = () => {
           ></PrivateRoute>
           <PrivateRoute exact path="/user" component={Profile}></PrivateRoute>
           <PrivateRoute exact path="/user/edit" component={Edit}></PrivateRoute>
+          <PrivateRoute exact path="/user/map" component={Map}></PrivateRoute>
           <PrivateRoute
             exact
             path="/admin"
