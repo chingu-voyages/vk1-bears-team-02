@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Nav from "../Nav/Nav";
 import Sidebar from "../Sidebar/Sidebar";
 import MapView from "../../MapView/MapView";
@@ -6,18 +6,23 @@ import MapView from "../../MapView/MapView";
 import axios from "axios";
 
 import Pusher from "pusher-js";
-
+import { AuthenticationContext } from "../../context/AuthenticationContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Dashboard() {
 	const [status, setStatus] = useState("openedSidebar");
-
+	const { authenticated, setAuth } = useContext(AuthenticationContext);
 	useEffect(() => {
+		// setAuth(localStorage.getItem("setAuth"));
 		// const getLatestMapData = async()=>{
-
+		// alert();
 		//   const data = await axios.get(`http://localhost:5000/map-data`);
 		// }
+
+		if (localStorage.getItem("role") === null) {
+			window.location.replace(`${process.env.REACT_APP_FRONTEND}admin/login`);
+		}
 
 		Pusher.logToConsole = true;
 
