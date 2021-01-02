@@ -5,6 +5,8 @@ import { Form, Button } from "react-bootstrap";
 import swal from "sweetalert";
 import axios from "axios";
 
+import jwt_decode from "jwt-decode";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -37,12 +39,24 @@ const Login = () => {
 					console.log(response);
 
 					const message = response.data.message;
-					if (message === "user login") {
-						setTimeout(function () {
-							setAuth(true);
-						}, 6000);
 
-						toast.success(`${message}`);
+					if (message === "user login") {
+						const token = response.data.token;
+						const decoded = jwt_decode(token);
+
+						localStorage.setItem("role", decoded.role);
+						localStorage.setItem("username", decoded.username);
+						localStorage.setItem("email", decoded.email);
+						localStorage.setItem("userId", decoded.userId);
+						localStorage.setItem("setAuth", true);
+
+						toast.success(`${message}`, { autoClose: 2000 });
+						console.log(decoded);
+						setTimeout(function () {
+							window.location.replace(
+								`${process.env.REACT_APP_FRONTEND}user/flood`
+							);
+						}, 3000);
 					} else {
 						toast.warning(`${message}`);
 					}
@@ -58,6 +72,7 @@ const Login = () => {
 	};
 
 	useEffect(() => {
+		localStorage.clear();
 		// const getLoginData = async () => {
 		// 	try {
 		// 		const response = await axios.get(
