@@ -5,6 +5,9 @@ import "./profile.css";
 // Components
 import Nav from "../Nav/Nav";
 
+import Moment from "react-moment";
+import "moment-timezone";
+
 import { AuthenticationContext } from "../../context/AuthenticationContext";
 
 function Profile() {
@@ -70,7 +73,12 @@ function Profile() {
 								return (
 									<tr>
 										<td>{data.properties.disasterType}</td>
-										<td>{data.date_send}</td>
+										<td>
+											<Moment
+												format="MMMM DD, YYYY hh:mm:ss A"
+												date={data.date_send}
+											/>
+										</td>
 										<td>{data.status}</td>
 									</tr>
 								);
