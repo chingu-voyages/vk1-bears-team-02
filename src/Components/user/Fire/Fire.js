@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Nav from "../Nav/Nav";
 import HelpButton from "../HelpButton/HelpButton";
 import Footer from "../Footer/Footer";
@@ -6,6 +6,12 @@ import Footer from "../Footer/Footer";
 import logo from "./img/fire.svg";
 
 function Fire() {
+	// useEffect(() => {
+	// 	if (localStorage.getItem("role") === null) {
+	// 		// window.location.replace(`${process.env.REACT_APP_FRONTEND}`);
+	// 		// window.location.href = `${process.env.REACT_APP_FRONTEND}login`;
+	// 	}
+	}, []);
 	const fireLogo = (
 		<img src={logo} width="60px" alt="fire logo" className="mb-4" />
 	);
