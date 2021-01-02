@@ -64,7 +64,7 @@ const HelpButton = ({ logo, disasterType }) => {
 				};
 
 				const response = await axios.post(
-					"http://localhost:5000/map-data",
+					`${process.env.REACT_APP_BACKEND}map-data`,
 					data
 				);
 				// console.log(response);

@@ -124,7 +124,9 @@ function Reports() {
 	useEffect(() => {
 		const getReport = async () => {
 			try {
-				const data = await axios.get(`http://localhost:5000/map-data-report`);
+				const data = await axios.get(
+					`${process.env.REACT_APP_BACKEND}map-data-report`
+				);
 
 				console.log(data.data.features);
 				setReportData(data.data.features);

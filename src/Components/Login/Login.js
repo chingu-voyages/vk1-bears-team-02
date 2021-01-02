@@ -27,10 +27,13 @@ const Login = () => {
 		} else {
 			const getLoginDataWithForm = async (req, res) => {
 				try {
-					const response = await axios.post("http://localhost:5000/login", {
-						username: data.username,
-						password: data.password,
-					});
+					const response = await axios.post(
+						`${process.env.REACT_APP_BACKEND}login`,
+						{
+							username: data.username,
+							password: data.password,
+						}
+					);
 					console.log(response);
 
 					const message = response.data.message;
@@ -122,7 +125,7 @@ const Login = () => {
 						Login
 					</button>
 					<span className="or">or</span>
-					<a href="http://localhost:5000/google" class="google-btn">
+					<a href={process.env.REACT_APP_BACKEND + "google"} class="google-btn">
 						Login with Google
 					</a>
 				</div>

@@ -62,6 +62,10 @@ const App = () => {
 						exact
 						path="/admin/management"
 						component={Management}></PrivateRoute>
+					<PrivateRoute
+						exact
+						path="/admin/login"
+						component={AdminLogin}></PrivateRoute>
 				</AuthenticationProvider>
 			</Switch>
 		</Router>

@@ -73,7 +73,7 @@ export default function PopOver(props) {
 						date_acknowledge: date,
 					};
 					const response = await axios.put(
-						`http://localhost:5000/map-data/${property._id}`,
+						`${process.env.REACT_APP_BACKEND}map-data/${property._id}`,
 						data
 					);
 					console.log(response);
@@ -85,7 +85,7 @@ export default function PopOver(props) {
 						date_resolved: date,
 					};
 					const response = await axios.put(
-						`http://localhost:5000/map-data/${property._id}`,
+						`${process.env.REACT_APP_BACKEND}map-data/${property._id}`,
 						data
 					);
 					console.log(response);
