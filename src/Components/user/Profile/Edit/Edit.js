@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -11,7 +11,7 @@ import { AuthenticationContext } from "../../../context/AuthenticationContext";
 import backButton from "../../../Login/img/back-button.svg";
 
 function Edit() {
-	const { details, setDetails } = useContext(AuthenticationContext);
+	// const { details, setDetails } = useContext(AuthenticationContext);
 
 	const { register, handleSubmit } = useForm();
 	const onSubmit = (data) => {

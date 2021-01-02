@@ -1,11 +1,39 @@
-import React, { useEffect } from "react";
-
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 // style
 import "./profile.css";
 // Components
 import Nav from "../Nav/Nav";
 
+import { AuthenticationContext } from "../../context/AuthenticationContext";
+
 function Profile() {
+	const [reportData, setReportData] = useState([]);
+	const { authenticated, setAuth } = useContext(AuthenticationContext);
+	useEffect(() => {
+		if (
+			localStorage.getItem("role") === null ||
+			localStorage.getItem("role") !== "civilian"
+		) {
+			// window.location.replace(`${process.env.REACT_APP_FRONTEND}user/fire`);
+			// window.location.href = `${process.env.REACT_APP_FRONTEND}login`;
+			setAuth(false);
+			// alert(localStorage.getItem("role"));
+		} else {
+			const userId = localStorage.getItem("userId");
+			const getReports = async () => {
+				const data = await axios.get(
+					`${process.env.REACT_APP_BACKEND}map-data/map-history/${userId}`
+				);
+
+				console.log(data.data.feature);
+				setReportData(data.data.feature);
+			};
+
+			getReports();
+		}
+	}, []);
+
 	return (
 		<main className="page-container">
 			<Nav />
@@ -38,21 +66,16 @@ function Profile() {
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>Fire</td>
-								<td>11-22-20</td>
-								<td>Responded</td>
-							</tr>
-							<tr>
-								<td>Earthquake</td>
-								<td>12-02-19</td>
-								<td>Responded</td>
-							</tr>
-							<tr>
-								<td>Flood</td>
-								<td>06-09-16</td>
-								<td>Responded</td>
-							</tr>
+							{reportData.map((data) => {
+								return (
+									<tr>
+										<td>{data.properties.disasterType}</td>
+										<td>{data.date_send}</td>
+										<td>{data.status}</td>
+									</tr>
+								);
+							})}
+							<tr></tr>
 						</tbody>
 					</table>
 				</div>
