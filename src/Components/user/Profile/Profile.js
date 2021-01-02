@@ -48,11 +48,13 @@ function Profile() {
 					<p className="ml-5 font-italic">{localStorage.getItem("email")}</p>
 					<a href="/user/edit" className="align-self-center mr-5">
 						<div className="button-wrapper mt-3">
-							<button
-								className="btn btn-primary rounded-pill font-weight-bolder"
-								type="submit">
-								Edit Info
-							</button>
+							{localStorage.getItem("googleId") === null && (
+								<button
+									className="btn btn-primary rounded-pill font-weight-bolder"
+									type="submit">
+									Edit Info
+								</button>
+							)}
 						</div>
 					</a>
 				</div>
