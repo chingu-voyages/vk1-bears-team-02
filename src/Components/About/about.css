@@ -1,0 +1,79 @@
+@import "../../style/colors.css";
+
+.about-page {
+  background: var(--primary-red);
+  color: var(--primary-white);
+}
+
+.about-page h1 {
+  font-size: 20px;
+  text-align: center;
+  margin: 30px 0 40px 0;
+}
+
+.about-page h2 {
+  font-weight: 700;
+  font-size: 20px;
+  margin: 20px 0 15px 0;
+}
+
+.aboutCardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.aboutCard {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 80%;
+  min-width: 320px;
+  height: 100px;
+  border-radius: 10px;
+  background: var(--primary-white);
+  padding: 10px 20px;
+  margin-bottom: 30px;
+  color: var(--primary-red);
+}
+
+.aboutCard h6 {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.aboutCard p {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+.aboutCard svg {
+  border: 2px solid var(--primary-red);
+  padding: 3px;
+  border-radius: 50%;
+  color: var(--primary-red);
+  width: 35px;
+  height: 35px;
+}
+
+.card_image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.about-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+  width: 80%;
+  min-width: 320px;
+  background: var(--primary-white);
+  color: var(--primary-red);
+  margin-bottom: 30px;
+}

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch } from "react-router-dom";
 import Main from "./Components/Main/Main";
 import { Login } from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
+import About from "./Components/About/About";
 import Flood from "./Components/user/Flood/Flood";
 import Fire from "./Components/user/Fire/Fire";
 import Earthquake from "./Components/user/Earthquake/Earthquake";
@@ -30,6 +31,7 @@ const App = () => {
 					<PublicRoute exact path="/" component={Main}></PublicRoute>
 					<PublicRoute exact path="/Login" component={Login}></PublicRoute>
 					<PublicRoute exact path="/login/:id" component={Login}></PublicRoute>
+					<PublicRoute exact path="/about" component={About}></PublicRoute>
 					<PublicRoute
 						exact
 						path="/Register"
