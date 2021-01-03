@@ -55,7 +55,7 @@ const HelpButton = ({ logo, disasterType }) => {
 		const sentDistressCall = async (req, res) => {
 			try {
 				const data = {
-					civilian: `5fcf8dc19e22ce1544064770`,
+					civilian: localStorage.getItem("userId"),
 					longitude: currentUserCoordinate.long,
 					latitude: currentUserCoordinate.lat,
 					// description: "sdadadadasd",
@@ -64,7 +64,7 @@ const HelpButton = ({ logo, disasterType }) => {
 				};
 
 				const response = await axios.post(
-					"http://localhost:5000/map-data",
+					`${process.env.REACT_APP_BACKEND}map-data`,
 					data
 				);
 				// console.log(response);

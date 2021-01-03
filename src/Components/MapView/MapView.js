@@ -176,7 +176,9 @@ const MapView = () => {
 				try {
 					console.log("call this");
 
-					const data = await axios.get(`http://localhost:5000/map-data`);
+					const data = await axios.get(
+						`${process.env.REACT_APP_BACKEND}map-data`
+					);
 
 					const features = data.data.features;
 

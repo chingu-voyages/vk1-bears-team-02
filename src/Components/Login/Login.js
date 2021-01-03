@@ -5,6 +5,8 @@ import { Form, Button } from "react-bootstrap";
 import swal from "sweetalert";
 import axios from "axios";
 
+import jwt_decode from "jwt-decode";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -27,19 +29,34 @@ const Login = () => {
 		} else {
 			const getLoginDataWithForm = async (req, res) => {
 				try {
-					const response = await axios.post("http://localhost:5000/login", {
-						username: data.username,
-						password: data.password,
-					});
+					const response = await axios.post(
+						`${process.env.REACT_APP_BACKEND}login`,
+						{
+							username: data.username,
+							password: data.password,
+						}
+					);
 					console.log(response);
 
 					const message = response.data.message;
-					if (message === "user login") {
-						setTimeout(function () {
-							setAuth(true);
-						}, 6000);
 
-						toast.success(`${message}`);
+					if (message === "user login") {
+						const token = response.data.token;
+						const decoded = jwt_decode(token);
+
+						localStorage.setItem("role", decoded.role);
+						localStorage.setItem("username", decoded.username);
+						localStorage.setItem("email", decoded.email);
+						localStorage.setItem("userId", decoded.userId);
+						localStorage.setItem("setAuth", true);
+
+						toast.success(`${message}`, { autoClose: 2000 });
+						console.log(decoded);
+						setTimeout(function () {
+							window.location.replace(
+								`${process.env.REACT_APP_FRONTEND}user/flood`
+							);
+						}, 3000);
 					} else {
 						toast.warning(`${message}`);
 					}
@@ -55,6 +72,7 @@ const Login = () => {
 	};
 
 	useEffect(() => {
+		localStorage.clear();
 		// const getLoginData = async () => {
 		// 	try {
 		// 		const response = await axios.get(
@@ -78,13 +96,13 @@ const Login = () => {
 		const getID = getQueryString.get("id");
 		const checkHasId = getQueryString.has("id");
 
-		if (checkHasId) {
-			// alert(getID);
-			toast.success(`User verified`, { autoClose: 2000 });
-			setTimeout(() => {
-				setAuth(true);
-			}, 3000);
-		}
+		// if (checkHasId) {
+		// 	// alert(getID);
+		// 	toast.success(`User verified`, { autoClose: 2000 });
+		// 	setTimeout(() => {
+		// 		setAuth(true);
+		// 	}, 3000);
+		// }
 		// alert(window.location.search);
 	}, []);
 
@@ -122,7 +140,7 @@ const Login = () => {
 						Login
 					</button>
 					<span className="or">or</span>
-					<a href="http://localhost:5000/google" class="google-btn">
+					<a href={process.env.REACT_APP_BACKEND + "google"} class="google-btn">
 						Login with Google
 					</a>
 				</div>
