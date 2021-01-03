@@ -96,13 +96,13 @@ const Login = () => {
 		const getID = getQueryString.get("id");
 		const checkHasId = getQueryString.has("id");
 
-		if (checkHasId) {
-			// alert(getID);
-			toast.success(`User verified`, { autoClose: 2000 });
-			setTimeout(() => {
-				setAuth(true);
-			}, 3000);
-		}
+		// if (checkHasId) {
+		// 	// alert(getID);
+		// 	toast.success(`User verified`, { autoClose: 2000 });
+		// 	setTimeout(() => {
+		// 		setAuth(true);
+		// 	}, 3000);
+		// }
 		// alert(window.location.search);
 	}, []);
 
