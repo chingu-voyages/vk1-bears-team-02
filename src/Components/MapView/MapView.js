@@ -42,7 +42,7 @@ const popupOffsets = {
 
 const MapView = () => {
 	//example user
-	const [user, setUser] = useState("user");
+	const [user, setUser] = useState(localStorage.getItem("role"));
 
 	const [mapState, setMap] = useState(null);
 
@@ -76,24 +76,16 @@ const MapView = () => {
 				zoom: zoom,
 				// pitch: tiltAngle,
 			});
+			// alert(user);
 
+			let geolocate = new mapboxgl.GeolocateControl({
+				positionOptions: {
+					enableHighAccuracy: true,
+				},
+				trackUserLocation: true,
+				showUserLocation: false,
+			});
 			if (user === "admin") {
-			} else {
-				// Initialize the geolocate control.
-				let geolocate = new mapboxgl.GeolocateControl({
-					positionOptions: {
-						enableHighAccuracy: true,
-					},
-					trackUserLocation: true,
-					showUserLocation: false,
-				});
-				// Add the control to the map.
-				map.addControl(geolocate, "bottom-left");
-				// geolocate.trigger(alert("trigger"));
-
-				// document.getElementById("trigger").addEventListener("click", () => {
-				// 	geolocate.trigger();
-				// });
 				const geocoder = new MapboxGeocoder({
 					accessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,
 					mapboxgl: mapboxgl,
@@ -101,6 +93,16 @@ const MapView = () => {
 				});
 				console.log(geocoder);
 				map.addControl(geocoder);
+			} else if (user === "civilian") {
+				// Initialize the geolocate control.
+
+				// Add the control to the map.
+				map.addControl(geolocate, "top-left");
+				// geolocate.trigger(alert("trigger"));
+
+				// document.getElementById("trigger").addEventListener("click", () => {
+				// 	geolocate.trigger();
+				// });
 
 				// get your current coordinates
 				geolocate.on("geolocate", (e) => {
@@ -117,20 +119,24 @@ const MapView = () => {
 					var iconHandler = document.createElement("div");
 					iconHandler.className = "marker-icon-current-coordinate-user-style";
 
-					new mapboxgl.Marker(iconHandler).setLngLat([lng, lat]).addTo(map);
+					new mapboxgl.Marker({ color: "red" })
+						.setLngLat([lng, lat])
+						.addTo(map);
 				});
 			}
 
 			// add navigation control (zoom buttons)
 			let navigationControl = new mapboxgl.NavigationControl();
-			map.addControl(navigationControl, "bottom-right");
+			map.addControl(navigationControl, "top-right");
 
 			// add fullscreen control
 			// map.addControl(new mapboxgl.FullscreenControl());
 
 			map.on("load", () => {
 				setMap(map);
-
+				if (user === "civilian") {
+					geolocate.trigger();
+				}
 				map.resize();
 			});
 
