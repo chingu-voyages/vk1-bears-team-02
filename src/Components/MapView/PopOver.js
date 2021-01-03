@@ -21,6 +21,8 @@ export default function PopOver(props) {
 
 	const [dateResponded, setDateResponded] = useState(null);
 
+	const [user, setUser] = useState(localStorage.getItem("role"));
+
 	console.log(`data: ${geometry.coordinates}`);
 	const [currentUserCoordinate, setCurrentUserCoordinate] = useState({
 		lat: 0,
@@ -146,12 +148,14 @@ export default function PopOver(props) {
 							<strong>{properties.disasterType}</strong>
 						</td>
 					</tr>
-					<tr>
-						<th>Distance from my location</th>
-						<td>
-							<strong>{distance}</strong>
-						</td>
-					</tr>
+					{user === "civilian" && (
+						<tr>
+							<th>Distance from my location</th>
+							<td>
+								<strong>{distance.toFixed(2)}Km</strong>
+							</td>
+						</tr>
+					)}
 
 					<tr>
 						<th>Current Status</th>
@@ -211,25 +215,30 @@ export default function PopOver(props) {
 					</tr>
 				</tbody>
 			</Table>
-			{status !== "resolved" && (
-				<Button
-					variant={
-						status === "sent"
-							? "danger"
-							: status === "acknowledge"
-							? "info"
-							: "success"
-					}
-					onClick={() => {
-						respond(datas);
-					}}>
-					{status === "sent"
-						? "Respond"
-						: status === "acknowledge"
-						? "Mark as resolve"
-						: "Resolved"}
-				</Button>
-			)}
+
+			{user === "admin"
+				? status !== "resolved" && (
+						<Button
+							variant={
+								status === "sent"
+									? "danger"
+									: status === "acknowledge"
+									? "info"
+									: "success"
+							}
+							onClick={() => {
+								respond(datas);
+							}}>
+							{status === "sent"
+								? "Respond"
+								: status === "acknowledge"
+								? "Mark as resolve"
+								: "Resolved"}
+						</Button>
+				  )
+				: ""}
+
+			{}
 			{/* <div>
 				<h3>{properties.title}</h3>
 				<p>
