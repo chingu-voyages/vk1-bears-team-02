@@ -87,6 +87,7 @@ function Management() {
 			selector: "username",
 			sortable: true,
 			// right: true,
+			// omit: true,
 		},
 		{
 			name: "Action",

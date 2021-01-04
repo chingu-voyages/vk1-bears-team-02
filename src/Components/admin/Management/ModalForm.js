@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Modal, InputGroup, FormControl, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import "./modalForm.css";
 
 export default function ModalForm(props) {
 	const { children, username, givenName, familyName, email } = props;
@@ -17,7 +18,7 @@ export default function ModalForm(props) {
 		username: username,
 		email: email,
 	});
-	const { register, handleSubmit } = useForm();
+	const { register, handleSubmit, errors } = useForm();
 
 	const handleChange = (e) => {
 		const value = e.target.value;
@@ -38,6 +39,9 @@ export default function ModalForm(props) {
 
 	const onSubmit = (data) => {
 		console.log(data.username);
+		console.log(errors);
+
+		console.log(data);
 		setDisableField(true);
 
 		setTimeout(() => {
@@ -66,10 +70,16 @@ export default function ModalForm(props) {
 								name="givenName"
 								value={userData.givenName}
 								onChange={handleChange}
-								ref={register}
+								ref={register({ required: true })}
 								disabled={disableField}
 							/>
+							{errors.givenName && (
+								<span>
+									<p>First Name is required</p>
+								</span>
+							)}
 						</Form.Group>
+
 						<Form.Group controlId="formLastName">
 							<Form.Label>Last Name</Form.Label>
 							<Form.Control
@@ -78,9 +88,14 @@ export default function ModalForm(props) {
 								name="familyName"
 								value={userData.familyName}
 								onChange={handleChange}
-								ref={register}
+								ref={register({ required: true })}
 								disabled={disableField}
 							/>
+							{errors.familyName && (
+								<span>
+									<p>Last Name is required</p>
+								</span>
+							)}
 						</Form.Group>
 						<Form.Group controlId="formEmail">
 							<Form.Label>Email</Form.Label>
@@ -90,9 +105,14 @@ export default function ModalForm(props) {
 								name="email"
 								value={userData.email}
 								onChange={handleChange}
-								ref={register}
+								ref={register({ required: true })}
 								disabled={disableField}
 							/>
+							{errors.email && (
+								<span>
+									<p>Email is required</p>
+								</span>
+							)}
 						</Form.Group>
 						<Form.Group controlId="formUsername">
 							<Form.Label>Username</Form.Label>
@@ -102,9 +122,14 @@ export default function ModalForm(props) {
 								name="username"
 								value={userData.username}
 								onChange={handleChange}
-								ref={register}
+								ref={register({ required: true })}
 								disabled={disableField}
 							/>
+							{errors.username && (
+								<span>
+									<p>Username is required</p>
+								</span>
+							)}
 						</Form.Group>
 					</Modal.Body>
 					<Modal.Footer>
