@@ -50,7 +50,7 @@ export default function ModalForm(props) {
 		console.log(data);
 		setDisableField(true);
 
-		const updateCivilianInfo = async () => {
+		const updateAdminInfo = async () => {
 			try {
 				const info = {
 					givenName: data.givenName,
@@ -60,7 +60,7 @@ export default function ModalForm(props) {
 					password: data.password,
 				};
 				const response = await axios.put(
-					`${process.env.REACT_APP_BACKEND}user/${id}`,
+					`${process.env.REACT_APP_BACKEND}admin/${id}`,
 					info
 				);
 
@@ -72,7 +72,7 @@ export default function ModalForm(props) {
 			} catch (error) {}
 		};
 
-		updateCivilianInfo();
+		updateAdminInfo();
 
 		setTimeout(() => {
 			window.location.reload();

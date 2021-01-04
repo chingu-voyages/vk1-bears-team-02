@@ -1,11 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import Sidebar from "../Sidebar/Sidebar";
 import { Modal, Container, Col, Row } from "react-bootstrap";
 import DataTable from "react-data-table-component";
 import ModalForm from "./ModalForm";
+import ModalFormAdmin from "./ModalFormAdmin";
+
+import axios from "axios";
 
 function Management() {
+	const [civilians, setCivilians] = useState([]);
+	const [admins, setAdmins] = useState([]);
+	useEffect(() => {
+		const getCivilians = async () => {
+			try {
+				const data = await axios.get(`${process.env.REACT_APP_BACKEND}users`);
+
+				// console.log(data.data.data);
+				setCivilians(data.data.data);
+			} catch (error) {}
+		};
+
+		const getAdmins = async () => {
+			try {
+				const data = await axios.get(`${process.env.REACT_APP_BACKEND}admins`);
+
+				// console.log(data.data.data);
+				// setCivilians(data.data.data);
+				setAdmins(data.data.data);
+			} catch (error) {}
+		};
+
+		getCivilians();
+		getAdmins();
+	}, []);
+
 	const data = [
 		{
 			id: 1,
@@ -91,16 +120,59 @@ function Management() {
 		},
 		{
 			name: "Action",
-			cell: (row) => (
-				<ModalForm
-					username={row.username}
-					givenName={row.givenName}
-					familyName={row.familyName}
-					email={row.email}
-					id={row.id}>
-					Update Info {row.id}
-				</ModalForm>
-			),
+			cell: (row) =>
+				row.googleId == null && (
+					<ModalForm
+						username={row.username}
+						givenName={row.givenName}
+						familyName={row.familyName}
+						email={row.email}
+						id={row._id}>
+						Update Info
+					</ModalForm>
+				),
+			// right: true,
+		},
+	];
+
+	const columnsAdmin = [
+		{
+			name: "First Name",
+			selector: "givenName",
+			sortable: true,
+		},
+		{
+			name: "Last Name",
+			selector: "familyName",
+			sortable: true,
+			// right: true,
+		},
+		{
+			name: "Email",
+			selector: "email",
+			sortable: true,
+			// right: true,
+		},
+		{
+			name: "Username",
+			selector: "username",
+			sortable: true,
+			// right: true,
+			// omit: true,
+		},
+		{
+			name: "Action",
+			cell: (row) =>
+				row.googleId == null && (
+					<ModalFormAdmin
+						username={row.username}
+						givenName={row.givenName}
+						familyName={row.familyName}
+						email={row.email}
+						id={row._id}>
+						Update Info
+					</ModalFormAdmin>
+				),
 			// right: true,
 		},
 	];
@@ -123,7 +195,22 @@ function Management() {
 							<DataTable
 								title="Civilian List"
 								columns={columns}
-								data={data}
+								data={civilians}
+								pagination
+								paginationPerPage={5}
+								paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
+							/>
+						</Col>
+					</Row>
+
+					<hr />
+
+					<Row>
+						<Col>
+							<DataTable
+								title="Admin List"
+								columns={columnsAdmin}
+								data={admins}
 								pagination
 								paginationPerPage={5}
 								paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
