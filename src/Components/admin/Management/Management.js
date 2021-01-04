@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import Sidebar from "../Sidebar/Sidebar";
-import { Modal, Container, Col, Row } from "react-bootstrap";
+import { Modal, Container, Col, Row, Button, Form } from "react-bootstrap";
+
 import DataTable from "react-data-table-component";
 import ModalForm from "./ModalForm";
 import ModalFormAdmin from "./ModalFormAdmin";
+import AddUser from "./AddUser";
 
 import axios from "axios";
 
 function Management() {
+	//for modal
+
 	const [civilians, setCivilians] = useState([]);
 	const [admins, setAdmins] = useState([]);
 	useEffect(() => {
@@ -188,6 +192,14 @@ function Management() {
 					<Row>
 						<Col>
 							<h1>User Management</h1>
+						</Col>
+						<Col
+							style={{
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+							}}>
+							<AddUser />
 						</Col>
 					</Row>
 					<Row>
