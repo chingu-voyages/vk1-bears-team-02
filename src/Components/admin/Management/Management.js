@@ -91,7 +91,14 @@ function Management() {
 		{
 			name: "Action",
 			cell: (row) => (
-				<ModalForm username={row.username}>Update Info {row.id}</ModalForm>
+				<ModalForm
+					username={row.username}
+					givenName={row.givenName}
+					familyName={row.familyName}
+					email={row.email}
+					id={row.id}>
+					Update Info {row.id}
+				</ModalForm>
 			),
 			// right: true,
 		},
