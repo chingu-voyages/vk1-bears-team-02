@@ -174,7 +174,7 @@ const MapView = () => {
 			Pusher.logToConsole = true;
 
 			//change this to your pusher key
-			const pusher = new Pusher("b74a80c7be8fd2b220d7", {
+			const pusher = new Pusher(process.env.REACT_APP_PUSHER_ID, {
 				cluster: "us3",
 			});
 
