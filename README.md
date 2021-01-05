@@ -1,5 +1,5 @@
 ## Links
-Front-end Repo: <a href="#intro">https://github.com/chingu-voyages/vk1-bears-team-02</a>
+Front-end Repo: <a href="#intro">https://github.com/chingu-voyages/vk1-bears-team-02</a>    
 Back-end Repo: <a href="#intro">https://github.com/chingu-voyages/vk1-bears-team-02BE</a>
 
 ## Table of Contents
