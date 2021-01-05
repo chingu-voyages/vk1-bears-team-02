@@ -11,7 +11,7 @@ Back-end Repo: <a href="#intro">https://github.com/chingu-voyages/vk1-bears-team
 
 ## <h2 id="intro">Introduction</h2>
 
-E-sagip is your emergency app for any kind of disaster, it will save your life, your family and all what you love.
+E-Sagip is a real-time, disaster emergency response application that aims to enable faster, and more efficient calamity reporting and government aid.
 
 ## <h2 id="userGuide"> User Guide </h2>
 
