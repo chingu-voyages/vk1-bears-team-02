@@ -135,7 +135,7 @@ const MapView = () => {
 			map.on("load", () => {
 				setMap(map);
 				if (user === "civilian") {
-					geolocate.trigger();
+					// geolocate.trigger();
 				}
 				map.resize();
 			});
