@@ -127,7 +127,7 @@ export default function AddUser() {
 							/>
 							{errors.givenName && (
 								<span>
-									<p>First Name is required</p>
+									<p className="error">First Name is required</p>
 								</span>
 							)}
 						</Form.Group>
@@ -145,7 +145,7 @@ export default function AddUser() {
 							/>
 							{errors.familyName && (
 								<span>
-									<p>Last Name is required</p>
+									<p className="error">Last Name is required</p>
 								</span>
 							)}
 						</Form.Group>
@@ -162,7 +162,7 @@ export default function AddUser() {
 							/>
 							{errors.email && (
 								<span>
-									<p>Email is required</p>
+									<p className="error">Email is required</p>
 								</span>
 							)}
 						</Form.Group>
@@ -179,7 +179,7 @@ export default function AddUser() {
 							/>
 							{errors.username && (
 								<span>
-									<p>Username is required</p>
+									<p className="error">Username is required</p>
 								</span>
 							)}
 						</Form.Group>
@@ -197,7 +197,7 @@ export default function AddUser() {
 							/>
 							{errors.password && (
 								<span>
-									<p>Password is required</p>
+									<p className="error">Password is required</p>
 								</span>
 							)}
 						</Form.Group>

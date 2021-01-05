@@ -105,7 +105,7 @@ export default function ModalForm(props) {
 							/>
 							{errors.givenName && (
 								<span>
-									<p>First Name is required</p>
+									<p className="error">First Name is required</p>
 								</span>
 							)}
 						</Form.Group>
@@ -123,7 +123,7 @@ export default function ModalForm(props) {
 							/>
 							{errors.familyName && (
 								<span>
-									<p>Last Name is required</p>
+									<p className="error">Last Name is required</p>
 								</span>
 							)}
 						</Form.Group>
@@ -140,7 +140,7 @@ export default function ModalForm(props) {
 							/>
 							{errors.email && (
 								<span>
-									<p>Email is required</p>
+									<p className="error">Email is required</p>
 								</span>
 							)}
 						</Form.Group>
@@ -157,7 +157,7 @@ export default function ModalForm(props) {
 							/>
 							{errors.username && (
 								<span>
-									<p>Username is required</p>
+									<p className="error">Username is required</p>
 								</span>
 							)}
 						</Form.Group>

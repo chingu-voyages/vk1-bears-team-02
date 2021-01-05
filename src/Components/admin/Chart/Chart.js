@@ -115,7 +115,7 @@ export default function Chart() {
 									maintainAspectRatio: true,
 									title: {
 										display: true,
-										text: "Number of distress call per case",
+										text: "Total number of distress call per case",
 										fontSize: 25,
 									},
 								}}
@@ -134,13 +134,56 @@ export default function Chart() {
 							/>
 						</div>
 					</Col>
-					{/* <Col>
+					<Col>
 						<div className="chart-container">
-							<Doughnut
-								data={chartData}
+							<Bar
 								options={{
 									maintainAspectRatio: true,
+									title: {
+										display: true,
+										text: "Total number of distress call per month",
+										fontSize: 25,
+									},
 								}}
+								data={{
+									labels: ["January", "February", "March", "April", "May"],
+									datasets: [
+										{
+											label: "Fire",
+											backgroundColor: "rgba(255, 99, 132, 0.6)",
+											borderColor: "rgba(255, 99, 132, 0.6)",
+											pointRadius: false,
+											pointColor: "rgba(255, 99, 132, 0.6)",
+											pointStrokeColor: "rgba(255, 99, 132, 0.6)",
+											pointHighlightFill: "rgba(255, 99, 132, 0.6)",
+											pointHighlightStroke: "rgba(255, 99, 132, 0.6)",
+											data: [28, 48, 40, 19, 86, 27, 90],
+										},
+										{
+											label: "Flood",
+											backgroundColor: "rgba(54, 162, 235, 0.6)",
+											borderColor: "rgba(54, 162, 235, 0.6)",
+											pointRadius: false,
+											pointColor: "rgba(54, 162, 235, 0.6)",
+											pointStrokeColor: "rgba(54, 162, 235, 0.6)",
+											pointHighlightFill: "rgba(54, 162, 235, 0.6)",
+											pointHighlightStroke: "rgba(54, 162, 235, 0.6)",
+											data: [65, 59, 80, 81, 56, 55, 40],
+										},
+										{
+											label: "Earthquake",
+											backgroundColor: "rgba(255, 206, 86, 0.6)",
+											borderColor: "rgba(255, 206, 86, 0.6)",
+											pointRadius: false,
+											pointColor: "rgba(255, 206, 86, 0.6)",
+											pointStrokeColor: "rgba(255, 206, 86, 0.6)",
+											pointHighlightFill: "rgba(255, 206, 86, 0.6)",
+											pointHighlightStroke: "rgba(255, 206, 86, 0.6)",
+											data: [65, 59, 80, 81, 56, 55, 40],
+										},
+									],
+								}}
+
 								// width={100}
 								//   options={{
 								//     title:{
@@ -155,11 +198,11 @@ export default function Chart() {
 								//   }}
 							/>
 						</div>
-					</Col> */}
+					</Col>
 				</Row>
 
-				{/* <Row style={{ marginTop: "50px" }}>
-					<Col>
+				<Row style={{ marginTop: "50px" }}>
+					{/* <Col>
 						<div className="chart-container">
 							<Line
 								data={chartData}
@@ -185,10 +228,10 @@ export default function Chart() {
 								//   }}
 							/>
 						</div>
-					</Col>
-					<Col>
+					</Col> */}
+					{/* <Col>
 						<div className="chart-container">
-							<Pie
+							<Bar
 								data={chartData}
 								options={{
 									maintainAspectRatio: true,
@@ -207,8 +250,8 @@ export default function Chart() {
 								//   }}
 							/>
 						</div>
-					</Col>
-				</Row> */}
+					</Col> */}
+				</Row>
 			</Container>
 		</>
 	);
