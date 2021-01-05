@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import Sidebar from "../Sidebar/Sidebar";
-import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
+// import BootstrapTable from "react-bootstrap-table-next";
+// import paginationFactory from "react-bootstrap-table2-paginator";
 
 import Moment from "react-moment";
 import "moment-timezone";
@@ -11,115 +11,16 @@ import GeoCoding from "./GeoCoding";
 
 import { Container, Row, Col, Table } from "react-bootstrap";
 
+import DataTable from "react-data-table-component";
+
 import "./reports.css";
 
 import axios from "axios";
-
-const data = [
-	{
-		id: 1,
-		name: "John",
-		type: "fire",
-		dateReported: "yesterday",
-		status: "responded",
-		location: "Manila",
-	},
-	{
-		id: 2,
-		name: "Carl",
-		type: "flood",
-		dateReported: "today",
-		status: "responded",
-		location: "Manila",
-	},
-	{
-		id: 3,
-		name: "Carl",
-		type: "flood",
-		dateReported: "today",
-		status: "responded",
-		location: "Manila",
-	},
-	{
-		id: 4,
-		name: "Carl",
-		type: "flood",
-		dateReported: "today",
-		status: "responded",
-		location: "Manila",
-	},
-	{
-		id: 5,
-		name: "Carl",
-		type: "flood",
-		dateReported: "today",
-		status: "responded",
-		location: "Manila",
-	},
-	{
-		id: 6,
-		name: "Carl",
-		type: "flood",
-		dateReported: "today",
-		status: "responded",
-		location: "Manila",
-	},
-	{
-		id: 7,
-		name: "Carl",
-		type: "flood",
-		dateReported: "today",
-		status: "responded",
-		location: "Manila",
-	},
-	{
-		id: 8,
-		name: "Carl",
-		type: "flood",
-		dateReported: "today",
-		status: "responded",
-		location: "Manila",
-	},
-	{
-		id: 9,
-		name: "Carl",
-		type: "flood",
-		dateReported: "today",
-		status: "responded",
-		location: "Manila",
-	},
-	{
-		id: 10,
-		name: "Carl",
-		type: "flood",
-		dateReported: "today",
-		status: "responded",
-		location: "Manila",
-	},
-	{
-		id: 11,
-		name: "Carl",
-		type: "flood",
-		dateReported: "today",
-		status: "responded",
-		location: "Manila",
-	},
-];
-
-const columns = [
-	{ dataField: "name", text: "Name" },
-	{ dataField: "type", text: "Type" },
-	{ dataField: "dateReported", text: "Date Reported" },
-	{ dataField: "status", text: "Status" },
-	{ dataField: "location", text: "Location" },
-];
 
 function Reports() {
 	const [status, setStatus] = useState("openedSidebar");
 
 	const [reportData, setReportData] = useState([]);
-
-	const [dummy, setDummy] = useState();
 
 	useEffect(() => {
 		const getReport = async () => {
@@ -135,6 +36,81 @@ function Reports() {
 
 		getReport();
 	}, []);
+
+	const columns = [
+		{
+			name: "First Name",
+			selector: "civilian[0].givenName",
+			sortable: true,
+		},
+		{
+			name: "Last Name",
+			selector: "civilian[0].familyName",
+			sortable: true,
+			// right: true,
+		},
+		{
+			name: "Email",
+			selector: "civilian[0].email",
+			sortable: true,
+			// right: true,
+		},
+		{
+			name: "Username",
+			selector: "civilian[0].username",
+			sortable: true,
+			// right: true,
+			// omit: true,
+		},
+		{
+			name: "Disaster",
+			selector: "properties.disasterType",
+			sortable: true,
+			// right: true,
+			// omit: true,
+		},
+		{
+			name: "Status",
+			selector: "status",
+			sortable: true,
+			// right: true,
+			// omit: true,
+		},
+		{
+			name: "Date",
+			cell: (row) => (
+				// <GeoCoding
+				// 	username={row.username}
+				// 	givenName={row.givenName}
+				// 	familyName={row.familyName}
+				// 	email={row.email}
+				// 	id={row._id}>
+				// 	Update Info
+				// </GeoCoding>
+				<Moment format="MMMM DD, YYYY hh:mm:ss A" date={row.date_send} />
+			),
+			// right: true,
+		},
+		{
+			name: "Coordinates",
+			cell: (row) => (
+				<>
+					Lng:{row.geometry.coordinates[0].toFixed(2)} <br />
+					Lat: {row.geometry.coordinates[1].toFixed(2)}
+				</>
+			),
+		},
+
+		{
+			name: "Location",
+			cell: (row) => (
+				<GeoCoding
+					longitude={row.geometry.coordinates[0]}
+					latitude={row.geometry.coordinates[1]}
+				/>
+			),
+		},
+	];
 
 	return (
 		<>
@@ -159,7 +135,16 @@ function Reports() {
 						</Row>
 						<Row>
 							<Col>
-								<Table striped bordered hover>
+								<DataTable
+									title=""
+									columns={columns}
+									data={reportData}
+									pagination
+									paginationPerPage={5}
+									paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
+								/>
+
+								{/* <Table striped bordered hover>
 									<thead>
 										<tr>
 											<th>First Name</th>
@@ -205,7 +190,7 @@ function Reports() {
 											);
 										})}
 									</tbody>
-								</Table>
+								</Table> */}
 							</Col>
 						</Row>
 					</Container>

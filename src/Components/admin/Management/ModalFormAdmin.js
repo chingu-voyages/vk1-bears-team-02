@@ -57,7 +57,7 @@ export default function ModalForm(props) {
 					familyName: data.familyName,
 					username: data.username,
 					email: data.email,
-					password: data.password,
+					password: data.new_password,
 				};
 				const response = await axios.put(
 					`${process.env.REACT_APP_BACKEND}admin/${id}`,
@@ -170,7 +170,7 @@ export default function ModalForm(props) {
 								name="new_password"
 								value={userData.password}
 								onChange={handleChange}
-								// ref={register({ required: true })}
+								ref={register({})}
 								disabled={disableField}
 							/>
 							{/* {errors.new_password && (
@@ -188,7 +188,7 @@ export default function ModalForm(props) {
 				</Form>
 			</Modal>
 
-			<ToastContainer />
+			{/* <ToastContainer /> */}
 		</div>
 	);
 }
