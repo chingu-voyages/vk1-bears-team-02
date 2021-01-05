@@ -8,11 +8,66 @@ import Nav from "../Nav/Nav";
 import Moment from "react-moment";
 import "moment-timezone";
 
+import DataTable from "react-data-table-component";
+
+import GeoCoding from "./../../admin/Reports/GeoCoding";
+
 import { AuthenticationContext } from "../../context/AuthenticationContext";
 
 function Profile() {
 	const [reportData, setReportData] = useState([]);
 	const { authenticated, setAuth } = useContext(AuthenticationContext);
+
+	const columns = [
+		{
+			name: "Disaster",
+			selector: "properties.disasterType",
+			sortable: true,
+			// right: true,
+			// omit: true,
+		},
+		{
+			name: "Status",
+			selector: "status",
+			sortable: true,
+			// right: true,
+			// omit: true,
+		},
+		{
+			name: "Date",
+			cell: (row) => (
+				// <GeoCoding
+				// 	username={row.username}
+				// 	givenName={row.givenName}
+				// 	familyName={row.familyName}
+				// 	email={row.email}
+				// 	id={row._id}>
+				// 	Update Info
+				// </GeoCoding>
+				<Moment format="MMMM DD, YYYY hh:mm:ss A" date={row.date_send} />
+			),
+			// right: true,
+		},
+		{
+			name: "Coordinates",
+			cell: (row) => (
+				<>
+					Lng:{row.geometry.coordinates[0].toFixed(2)} <br />
+					Lat: {row.geometry.coordinates[1].toFixed(2)}
+				</>
+			),
+		},
+
+		{
+			name: "Location",
+			cell: (row) => (
+				<GeoCoding
+					longitude={row.geometry.coordinates[0]}
+					latitude={row.geometry.coordinates[1]}
+				/>
+			),
+		},
+	];
 	useEffect(() => {
 		if (
 			localStorage.getItem("role") === null ||
@@ -60,7 +115,16 @@ function Profile() {
 				</div>
 				<div className="reports-wrapper mx-5 mt-4">
 					<h2>Report History</h2>
-					<table
+
+					<DataTable
+						title=""
+						columns={columns}
+						data={reportData}
+						pagination
+						paginationPerPage={5}
+						paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
+					/>
+					{/* <table
 						class="table table-sm table-bordered"
 						style={{ color: "var(--primary-white)" }}>
 						<thead>
@@ -87,7 +151,7 @@ function Profile() {
 							})}
 							<tr></tr>
 						</tbody>
-					</table>
+					</table> */}
 				</div>
 			</div>
 		</main>

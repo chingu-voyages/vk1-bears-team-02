@@ -229,6 +229,7 @@ function Management() {
 							/>
 						</Col>
 					</Row>
+					<Row style={{ marginBottom: "50px" }}></Row>
 				</Container>
 			</div>
 		</main>

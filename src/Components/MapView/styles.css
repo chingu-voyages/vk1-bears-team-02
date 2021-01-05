@@ -52,6 +52,14 @@ svg {
 	font-weight: bold;
 }
 
+@media only screen and (min-width: 276px) {
+	.sidebarStyle {
+		/* background-color: red; */
+		left: 35px;
+		top: 59px;
+	}
+}
+
 .marker-icon-current-coordinate-user-style {
 	background-image: url("./icons/blue-man-png.png");
 	background-size: cover;
