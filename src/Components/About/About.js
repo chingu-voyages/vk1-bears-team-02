@@ -47,9 +47,7 @@ const About = () => {
       >
         <h2>About E-Sagip</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut
-          scelerisque ligula. Maecenas pulvinar ullamcorper ex, ac sagittis orci
-          tempor ac.
+         E-Sagip is a real-time, disaster emergency response application that aims to enable faster, and more efficient calamity reporting and government aid.
         </p>
       </div>
     </main>
