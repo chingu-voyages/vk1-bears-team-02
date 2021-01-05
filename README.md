@@ -1,7 +1,7 @@
 ## Table of Contents
 
-<a href="#intro">1. Introduction</a>
-<a href="#intro">2. User Guide</a>
+<a href="#intro">1. Introduction</a> <br>
+<a href="#intro">2. User Guide</a> <br>
 <a href="#build">3. Build Setup</a>
 
 ## <h2 id="intro">Introduction</h2>
@@ -23,6 +23,11 @@ E-sagip is your emergency app for any kind of disaster, it will save your life, 
 
 Here's what the admin side sees when you send a distress alert.
 ![get help page](./src/md_images/admin-page.png)
+
+## <h2 id="team">Meet the Team </h2>
+- [John Cunanan](https://github.com/theCodingJohn)
+- [Ivan Christian Jay Funcion](https://github.com/supremeking23)
+- [Christian Tan](https://github.com/mikotan-cpu)
 
 ## <h2 id="build">Build Setup</h2>
 
