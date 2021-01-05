@@ -210,7 +210,20 @@ function Management() {
 								data={civilians}
 								pagination
 								paginationPerPage={5}
-								paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
+								paginationRowsPerPageOptions={[
+									5,
+									10,
+									15,
+									20,
+									25,
+									30,
+									50,
+									70,
+									100,
+									150,
+									500,
+									2000,
+								]}
 							/>
 						</Col>
 					</Row>
@@ -225,7 +238,20 @@ function Management() {
 								data={admins}
 								pagination
 								paginationPerPage={5}
-								paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
+								paginationRowsPerPageOptions={[
+									5,
+									10,
+									15,
+									20,
+									25,
+									30,
+									50,
+									70,
+									100,
+									150,
+									500,
+									2000,
+								]}
 							/>
 						</Col>
 					</Row>
