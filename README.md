@@ -2,7 +2,8 @@
 
 <a href="#intro">1. Introduction</a> <br>
 <a href="#intro">2. User Guide</a> <br>
-<a href="#build">3. Build Setup</a>
+<a href="#team">3. Meet the Team</a> <br>
+<a href="#build">4. Build Setup</a>
 
 ## <h2 id="intro">Introduction</h2>
 
