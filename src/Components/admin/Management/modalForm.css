@@ -6,3 +6,12 @@ p.error::before {
 	display: inline;
 	content: "⚠ ";
 }
+
+p.error-two {
+	color: #ffffff;
+}
+
+p.error-two::before {
+	display: inline;
+	content: "⚠ ";
+}
