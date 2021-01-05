@@ -38,7 +38,6 @@ function Login() {
 	}, []);
 
 	const onSubmit = (data) => {
-		setDisableField(true);
 		const getLoginDataWithForm = async (req, res) => {
 			try {
 				const response = await axios.post(
@@ -53,6 +52,7 @@ function Login() {
 				const message = response.data.message;
 
 				if (message === "user login") {
+					setDisableField(true);
 					toast.success(`${message}`, { autoClose: 2000 });
 					const token = response.data.token;
 					const decoded = jwt_decode(token);
