@@ -10,10 +10,10 @@ E-sagip is your emergency app for any kind of disaster, it will save your life, 
 
 ## <h2 id="userGuide"> User Guide </h2>
 
-1. Create your account.
-   ![register page](./src/md_images/register-page.png)
+1. Create your account.       
+   ![register page](./src/md_images/register-page.png)    
 
-2. Login your account.
+2. Login your account.    
    ![login page](./src/md_images/login-page.png)
 
 3. Choose the type of disaster that is currently happening in your area. Then, click the button to send a distress alert.
