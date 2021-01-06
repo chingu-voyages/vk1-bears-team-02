@@ -255,7 +255,7 @@ const MapView = () => {
 				ref={(element) => (mapContainer.current = element)}
 				className="map-renderer"
 			/>
-			<div className="sidebarStyle">
+			<div className={user === "admin" ? "sidebarStyleAdmin" : "sidebarStyle"}>
 				<p>
 					Longitude: {initialView.lng} | Latitude: {initialView.lat} | Zoom :{" "}
 					{zoom}
