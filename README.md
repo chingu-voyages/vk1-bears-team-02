@@ -1,6 +1,8 @@
 ## Links
-Front-end Repo: <a href="#intro">https://github.com/chingu-voyages/vk1-bears-team-02</a>    
-Back-end Repo: <a href="#intro">https://github.com/chingu-voyages/vk1-bears-team-02BE</a>
+User demo: https://www.youtube.com/watch?v=cGYt7ip70Fc&list=UUXUaaXNZgl38-VoXc_gupag&index=1    
+Admin demo:     
+Front-end Repo: https://github.com/chingu-voyages/vk1-bears-team-02    
+Back-end Repo: https://github.com/chingu-voyages/vk1-bears-team-02BE    
 
 ## Table of Contents
 
