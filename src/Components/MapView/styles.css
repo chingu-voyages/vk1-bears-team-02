@@ -1,118 +1,118 @@
 svg {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .popover-style {
-	background: red;
-	width: 500px !important;
+  background: red;
+  width: 500px !important;
 }
 
 .popover-style p {
-	color: "black";
+  color: "black";
 }
 
 .mapboxgl-popup-content {
-	background: #ececec;
+  background: #ececec;
 }
 
 .mapboxgl-popup-close-button {
-	width: 20px;
+  width: 20px;
 }
 
 .mapboxgl-popup-close-button:hover {
-	background: crimson;
+  background: crimson;
 }
 
 .map-container {
-	height: 100%;
-	width: 100%;
-	overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .map-renderer {
-	width: 100%;
-	height: 100%;
-	position: relative;
-	/* top: 50px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  /* top: 50px;
   right: 0;
   left: 307px; */
-	/* bottom: 0; */
+  /* bottom: 0; */
 }
 
 .sidebarStyle {
-	display: inline-block;
-	position: absolute;
-	top: 39px;
-	left: 295px;
-	margin: 12px;
-	background-color: #404040;
-	color: #ffffff;
-	z-index: 1 !important;
-	padding: 6px;
-	font-weight: bold;
+  display: inline-block;
+  position: absolute;
+  top: 39px;
+  left: 295px;
+  margin: 12px;
+  background-color: #404040;
+  color: #ffffff;
+  z-index: 1 !important;
+  padding: 6px;
+  font-weight: bold;
 }
 
 .sidebarStyleAdmin {
-	display: inline-block;
-	position: absolute;
-	top: 39px;
-	left: 295px;
-	margin: 12px;
-	background-color: #404040;
-	color: #ffffff;
-	z-index: 1 !important;
-	padding: 6px;
-	font-weight: bold;
+  display: inline-block;
+  position: absolute;
+  top: 39px;
+  left: 295px;
+  margin: 12px;
+  background-color: #404040;
+  color: #ffffff;
+  z-index: 1 !important;
+  padding: 6px;
+  font-weight: bold;
 }
 
 @media only screen and (min-width: 276px) {
-	.sidebarStyle {
-		/* background-color: red; */
-		left: 35px;
-		top: 59px;
-	}
+  .sidebarStyle {
+    /* background-color: red; */
+    left: 35px;
+    top: 59px;
+  }
 
-	.sidebarStyleAdmin {
-		/* background-color: red; */
-		left: 325px;
-		top: 61px;
-	}
+  .sidebarStyleAdmin {
+    /* background-color: red; */
+    left: 325px;
+    top: 61px;
+  }
 }
 
 .marker-icon-current-coordinate-user-style {
-	background-image: url("./icons/blue-man-png.png");
-	background-size: cover;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	cursor: pointer;
+  background-image: url("./icons/blue-man-png.png");
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .marker-icon-flood-style {
-	background-image: url("./icons/kisspng-tsunami-wave-stock-photography-clip-art-tsunami-png-transparent-image-5a76817429be26.645158151517715828171.png");
-	background-size: cover;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	cursor: pointer;
+  background-image: url("./icons/kisspng-tsunami-wave-stock-photography-clip-art-tsunami-png-transparent-image-5a76817429be26.645158151517715828171.png");
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .marker-icon-fire-style {
-	background-image: url("./icons/fire-png-696.png");
-	background-size: cover;
-	/* object-fit: contain; */
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	cursor: pointer;
+  background-image: url("./icons/fire-png-696.png");
+  background-size: cover;
+  /* object-fit: contain; */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .marker-icon-earthquake-style {
-	background-image: url("./icons/kisspng-vector-graphics-earthquake-image-natural-disaster-5c0320b3e7b220.072610591543708851949.png");
-	background-size: cover;
-	/* object-fit: contain; */
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	cursor: pointer;
+  background-image: url("./icons/kisspng-vector-graphics-earthquake-image-natural-disaster-5c0320b3e7b220.072610591543708851949.png");
+  background-size: cover;
+  /* object-fit: contain; */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
 }
