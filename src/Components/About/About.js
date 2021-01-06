@@ -34,11 +34,12 @@ const About = () => {
 				<Card
 					card={{
 						name: "Christian",
-						role: "Front-end Developer",
+						role: "Back-end Developer",
 						imgLink:
-							"https://secure.gravatar.com/avatar/d8fa08358d250e6e9115d58a9f832a23?rating=PG&size=1000&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar1000.20abed80.png",
-						linkedIn: "",
-						github: "",
+							"https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/6f64d8b2-add5-45ca-8629-88438ca29717/dcfrhd8-cdf55d85-7088-486c-ab3f-e6ab46d3811d.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvNmY2NGQ4YjItYWRkNS00NWNhLTg2MjktODg0MzhjYTI5NzE3XC9kY2ZyaGQ4LWNkZjU1ZDg1LTcwODgtNDg2Yy1hYjNmLWU2YWI0NmQzODExZC5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.ZMB_SG3EUWQKs2feePgTz-hSopMIYQ_QLeIoogdi1aE",
+						linkedIn:
+							"https://www.linkedin.com/in/christian-michael-730aa81a0/",
+						github: "https://github.com/mikotan-cpu/MP1TAN",
 					}}
 				/>
 			</div>
