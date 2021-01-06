@@ -146,7 +146,13 @@ export default function Chart() {
 									},
 								}}
 								data={{
-									labels: ["January", "February", "March", "April", "May"],
+									labels: [
+										"September",
+										"October",
+										"November",
+										"December",
+										"January",
+									],
 									datasets: [
 										{
 											label: "Fire",
