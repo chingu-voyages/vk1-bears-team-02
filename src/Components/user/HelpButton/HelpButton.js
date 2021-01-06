@@ -30,9 +30,8 @@ const HelpButton = ({ logo, disasterType }) => {
     }
 
     Pusher.logToConsole = true;
-
     const pusher = new Pusher(process.env.REACT_APP_PUSHER_ID, {
-      cluster: "us3",
+      cluster: process.env.REACT_APP_CLUSTER,
     });
 
     const channel2 = pusher.subscribe("map-data-update");
