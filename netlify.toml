@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/*"
+  to = "https://e-sagip-app.netlify.app"
+  status = 200
