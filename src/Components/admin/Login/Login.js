@@ -47,7 +47,7 @@ function Login() {
 						password: data.password,
 					}
 				);
-				console.log(response);
+				// console.log(response);
 
 				const message = response.data.message;
 
@@ -62,7 +62,7 @@ function Login() {
 					localStorage.setItem("email", decoded.email);
 					localStorage.setItem("userId", decoded.userId);
 					localStorage.setItem("setAuth", true);
-					console.log(decoded);
+					// console.log(decoded);
 					setTimeout(function () {
 						window.location.replace(`${process.env.REACT_APP_FRONTEND}admin`);
 						// setAuth(true);
@@ -71,7 +71,7 @@ function Login() {
 					toast.warning(`${message}`, { autoClose: 2000 });
 				}
 			} catch (error) {
-				console.error(`error:${error}`);
+				// console.error(`error:${error}`);
 			}
 		};
 
