@@ -29,7 +29,6 @@ function Reports() {
 					`${process.env.REACT_APP_BACKEND}map-data-report`
 				);
 
-				console.log(data.data.features);
 				setReportData(data.data.features);
 			} catch (error) {}
 		};
@@ -140,8 +139,8 @@ function Reports() {
 									columns={columns}
 									data={reportData}
 									pagination
-									paginationPerPage={5}
-									paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
+									paginationPerPage={3}
+									paginationRowsPerPageOptions={[3, 5, 10, 15, 20, 25, 30]}
 								/>
 
 								{/* <Table striped bordered hover>

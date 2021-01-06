@@ -23,7 +23,6 @@ export default function PopOver(props) {
 
 	const [user, setUser] = useState(localStorage.getItem("role"));
 
-	console.log(`data: ${geometry.coordinates}`);
 	const [currentUserCoordinate, setCurrentUserCoordinate] = useState({
 		lat: 0,
 		lang: 0,
@@ -32,9 +31,6 @@ export default function PopOver(props) {
 	useEffect(() => {
 		if (navigator.geolocation) {
 			navigator.geolocation.watchPosition(function (position) {
-				console.log("Latitude is :", position.coords.latitude);
-				console.log("Longitude is :", position.coords.longitude);
-
 				setCurrentUserCoordinate({
 					lat: position.coords.latitude,
 					lang: position.coords.longitude,
@@ -43,17 +39,16 @@ export default function PopOver(props) {
 		}
 
 		// Enable pusher logging - don't include this in production
-		Pusher.logToConsole = true;
+		// Pusher.logToConsole = true;
 
 		//change this to your pusher key
 		const pusher = new Pusher(process.env.REACT_APP_PUSHER_ID, {
-			cluster: "us3",
+			cluster: process.env.REACT_APP_CLUSTER,
 		});
 
 		const channel2 = pusher.subscribe("map-data-update");
 		channel2.bind("map-data-update-event", function (data) {
-			console.log(data.data);
-			console.log(`status mo ${data.data.status}`);
+			// console.log(`status mo ${data.data.status}`);
 			setStatus(data.data.status);
 
 			if (status !== "acknowledge" && status !== "resolved") {
@@ -78,7 +73,7 @@ export default function PopOver(props) {
 						`${process.env.REACT_APP_BACKEND}map-data/${property._id}`,
 						data
 					);
-					console.log(response);
+					// console.log(response);
 				} else if (property.status === "acknowledge") {
 					new_status = "resolved";
 
@@ -90,7 +85,7 @@ export default function PopOver(props) {
 						`${process.env.REACT_APP_BACKEND}map-data/${property._id}`,
 						data
 					);
-					console.log(response);
+					// console.log(response);
 				}
 
 				// window.location.reload();
@@ -115,10 +110,8 @@ export default function PopOver(props) {
 				`https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`
 			);
 			setPlaceName(geocode.data.features[0].place_name);
-			console.log(`geocode`);
-		} catch (error) {
-			console.log(error);
-		}
+			// console.log(`geocode`);
+		} catch (error) {}
 	};
 
 	geocodeCoordinates();
@@ -128,8 +121,6 @@ export default function PopOver(props) {
 	let options = { units: "kilometers" };
 
 	let distance = turf.distance(from, to, options);
-
-	console.log(`diff: ${distance}`);
 
 	return (
 		<>

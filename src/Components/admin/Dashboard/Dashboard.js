@@ -24,10 +24,10 @@ function Dashboard() {
 			window.location.replace(`${process.env.REACT_APP_FRONTEND}admin/login`);
 		}
 
-		Pusher.logToConsole = true;
+		// Pusher.logToConsole = true;
 
 		const pusher = new Pusher(process.env.REACT_APP_PUSHER_ID, {
-			cluster: "us3",
+			cluster: process.env.REACT_APP_CLUSTER,
 		});
 
 		const channel = pusher.subscribe("map-data-create");

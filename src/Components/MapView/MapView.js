@@ -175,7 +175,7 @@ const MapView = () => {
 
 			//change this to your pusher key
 			const pusher = new Pusher(process.env.REACT_APP_PUSHER_ID, {
-				cluster: "us3",
+				cluster: process.env.REACT_APP_CLUSTER,
 			});
 
 			const getAllCoordinates = async () => {

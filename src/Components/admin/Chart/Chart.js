@@ -57,7 +57,7 @@ export default function Chart() {
 				const response = await axios.get(
 					`${process.env.REACT_APP_BACKEND}map-data-fire/`
 				);
-				console.log(response);
+
 				// alert(response.data.count);
 				setFireCount(response.data.count);
 				// setchartDataCount([...chartDataCount, response.data.count]);
@@ -69,7 +69,7 @@ export default function Chart() {
 				const response = await axios.get(
 					`${process.env.REACT_APP_BACKEND}map-data-flood/`
 				);
-				console.log(response);
+
 				// alert(response.data.count);
 				setFloodCount(response.data.count);
 			} catch (error) {}
@@ -80,7 +80,7 @@ export default function Chart() {
 				const response = await axios.get(
 					`${process.env.REACT_APP_BACKEND}map-data-earthquake/`
 				);
-				console.log(response);
+
 				// alert(response.data.count);
 				setEarthquakeCount(response.data.count);
 			} catch (error) {}
